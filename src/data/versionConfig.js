@@ -85,8 +85,8 @@ export const GAME_VERSION_CONFIG = {
   toolCompatibility: {
     enchanting: {
       toolName: 'Enchantment Laboratory',
-      supportedVersions: 'Java 1.20.5 – 26.3+ (Stable)',
-      versionBadge: 'Java 1.20.5 – 26.3+',
+      supportedVersions: 'Java 1.0 – 26.3+ (Stable)',
+      versionBadge: 'Java 1.0 – 26.3+',
       lastVerified: 'October 2026',
       notes: 'Includes 1.21 Mace enchantments (Density, Breach, Wind Burst) and 1.20.5+ bracketed data components syntax.'
     },
