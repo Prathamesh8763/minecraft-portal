@@ -1,31 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import PortalHub from './components/PortalHub';
 import { PageHeaderNav, PageFooterNav } from './components/PageNavigationFrame';
-
-// All 15 Interactive Section Components
-import EncyclopediaHub from './components/EncyclopediaHub';
-import GameDropsTimeline from './components/GameDropsTimeline';
-import CraftingTableExplorer from './components/CraftingTableExplorer';
-import FurnaceSmelterExplorer from './components/FurnaceSmelterExplorer';
-import SmithingTableExplorer from './components/SmithingTableExplorer';
-import TradingExplorer from './components/TradingExplorer';
-import StructureExplorer from './components/StructureExplorer';
-import IconGallery from './components/IconGallery';
-import MobBestiary from './components/MobBestiary';
-import BiomeExplorer from './components/BiomeExplorer';
-import PotionBrewer from './components/PotionBrewer';
-import EnchantmentLab from './components/EnchantmentLab';
-import ResourcePackStudio from './components/ResourcePackStudio';
-import RedstoneLab from './components/RedstoneLab';
-import ModdingHub from './components/ModdingHub';
-import FeedbackHub from './components/FeedbackHub';
+import ErrorBoundary from './components/ErrorBoundary';
+import LoadingFallback from './components/LoadingFallback';
 import Footer from './components/Footer';
 
 import { ArrowUp } from 'lucide-react';
 import { playLevelUp, playClick } from './utils/soundFX';
 import { NAVIGATION_ITEMS } from './data/navigationRoutes';
+
+// Code-Split Lazy Loaded Interactive Section Components (Loaded on Demand)
+const EncyclopediaHub = lazy(() => import('./components/EncyclopediaHub'));
+const GameDropsTimeline = lazy(() => import('./components/GameDropsTimeline'));
+const CraftingTableExplorer = lazy(() => import('./components/CraftingTableExplorer'));
+const FurnaceSmelterExplorer = lazy(() => import('./components/FurnaceSmelterExplorer'));
+const SmithingTableExplorer = lazy(() => import('./components/SmithingTableExplorer'));
+const TradingExplorer = lazy(() => import('./components/TradingExplorer'));
+const StructureExplorer = lazy(() => import('./components/StructureExplorer'));
+const IconGallery = lazy(() => import('./components/IconGallery'));
+const MobBestiary = lazy(() => import('./components/MobBestiary'));
+const BiomeExplorer = lazy(() => import('./components/BiomeExplorer'));
+const PotionBrewer = lazy(() => import('./components/PotionBrewer'));
+const EnchantmentLab = lazy(() => import('./components/EnchantmentLab'));
+const ResourcePackStudio = lazy(() => import('./components/ResourcePackStudio'));
+const RedstoneLab = lazy(() => import('./components/RedstoneLab'));
+const ModdingHub = lazy(() => import('./components/ModdingHub'));
+const FeedbackHub = lazy(() => import('./components/FeedbackHub'));
 
 export default function App() {
   // Navigation State with resilient URL Hash sync
@@ -137,7 +139,11 @@ export default function App() {
               viewMode={viewMode}
               onToggleViewMode={setViewMode}
             />
-            {renderActivePageComponent()}
+            <ErrorBoundary onReset={() => handleNavigate('home')}>
+              <Suspense fallback={<LoadingFallback message={`GENERATING ${activeSection.toUpperCase()} CHUNK...`} />}>
+                {renderActivePageComponent()}
+              </Suspense>
+            </ErrorBoundary>
             <PageFooterNav 
               currentSectionId={activeSection}
               onSelectSection={handleNavigate}
@@ -149,22 +155,26 @@ export default function App() {
         /* VIEW MODE 2: CONTINUOUS SCROLL MODE (ALL SECTIONS SEQUENTIALLY) */
         <main className="animate-fadeIn">
           <Hero />
-          <EncyclopediaHub onNavigateToSection={handleNavigate} />
-          <GameDropsTimeline />
-          <CraftingTableExplorer />
-          <FurnaceSmelterExplorer />
-          <SmithingTableExplorer />
-          <TradingExplorer />
-          <StructureExplorer />
-          <IconGallery />
-          <MobBestiary />
-          <BiomeExplorer />
-          <PotionBrewer />
-          <EnchantmentLab />
-          <ResourcePackStudio />
-          <RedstoneLab />
-          <ModdingHub />
-          <FeedbackHub />
+          <ErrorBoundary onReset={() => handleNavigate('home')}>
+            <Suspense fallback={<LoadingFallback message="STREAMING CHUNKS..." />}>
+              <EncyclopediaHub onNavigateToSection={handleNavigate} />
+              <GameDropsTimeline />
+              <CraftingTableExplorer />
+              <FurnaceSmelterExplorer />
+              <SmithingTableExplorer />
+              <TradingExplorer />
+              <StructureExplorer />
+              <IconGallery />
+              <MobBestiary />
+              <BiomeExplorer />
+              <PotionBrewer />
+              <EnchantmentLab />
+              <ResourcePackStudio />
+              <RedstoneLab />
+              <ModdingHub />
+              <FeedbackHub />
+            </Suspense>
+          </ErrorBoundary>
         </main>
       )}
 
