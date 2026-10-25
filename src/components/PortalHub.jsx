@@ -24,7 +24,8 @@ import {
   Bookmark,
   History,
   Trash2,
-  ArrowUpRight
+  ArrowUpRight,
+  Award
 } from 'lucide-react';
 import { playClick, playPop, playLevelUp } from '../utils/soundFX';
 import { useDebounce, precomputeSearchIndex, buildCategoryMultiMap, resolveNaturalPlayerQuery } from '../utils/searchEngine';
@@ -314,7 +315,7 @@ export default function PortalHub({ onSelectSection, onToggleViewMode, viewMode 
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {[
             {
               id: 'crafting',
@@ -351,6 +352,15 @@ export default function PortalHub({ onSelectSection, onToggleViewMode, viewMode 
               badge: 'Engineering',
               color: 'from-red-950/70 to-[#181924]',
               borderColor: 'hover:border-red-400'
+            },
+            {
+              id: 'checklists',
+              title: 'Survival Checklists',
+              subtitle: 'Day 1 survival, Nether prep & God gear milestones',
+              icon: Award,
+              badge: 'Checklists',
+              color: 'from-emerald-950/70 to-[#181924]',
+              borderColor: 'hover:border-emerald-400'
             }
           ].map(tool => {
             const Icon = tool.icon;

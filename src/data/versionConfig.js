@@ -131,6 +131,13 @@ export const GAME_VERSION_CONFIG = {
       versionBadge: 'Java 1.14 – 26.3+',
       lastVerified: 'October 2026',
       notes: 'Workstation links, restock cycles, curing discounts, and level 1-5 trade tiers.'
+    },
+    checklists: {
+      toolName: 'Minecraft Progression & Survival Checklists',
+      supportedVersions: 'Java 1.0 – 26.3+ (Stable)',
+      versionBadge: 'Java 1.0 – 26.3+',
+      lastVerified: 'October 2026',
+      notes: 'Day 1 survival, Nether prep, Endgame God gear, and Redstone milestones.'
     }
   },
 

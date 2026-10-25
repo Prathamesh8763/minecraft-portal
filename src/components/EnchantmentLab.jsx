@@ -1821,8 +1821,9 @@ export default function EnchantmentLab() {
                 <div key={idx} className="bg-slate-950/70 border border-slate-800 rounded-xl p-4">
                   <div className="flex items-center justify-between mb-2">
                     <h5 className="font-bold text-purple-300 text-sm">{rule.name}</h5>
-                    <span className="bg-red-950 text-red-400 border border-red-500/40 text-[10px] font-bold px-2 py-0.5 rounded">
-                      Mutually Exclusive
+                    <span className="bg-red-950 text-red-200 border border-red-500/40 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1">
+                      <XCircle className="w-3.5 h-3.5 text-red-400 shrink-0" />
+                      <span>✕ Incompatible (Cannot Combine)</span>
                     </span>
                   </div>
                   <div className="flex flex-wrap gap-1.5 my-2.5">

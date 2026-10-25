@@ -26,7 +26,7 @@ export default function Navbar({
   viewMode, 
   onToggleViewMode 
 }) {
-  const [soundOn, setSoundOn] = useState(true);
+  const [soundOn, setSoundOn] = useState(() => isSoundEnabled());
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentLevel, setCurrentLevel] = useState(1);

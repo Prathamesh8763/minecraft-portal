@@ -209,9 +209,10 @@ export default function EncyclopediaHub({ onNavigateToSection }) {
     setSelectedResultIndex(0);
   }, [searchResults.length]);
 
-  // Synchronize local bookmark status and record recent history whenever activeTopic changes
+  // Synchronize local bookmark status, document title, and record recent history whenever activeTopic changes
   useEffect(() => {
     if (activeTopic) {
+      document.title = `${activeTopic.title} — Minecraft Java Encyclopedia`;
       setIsBookmarked(isItemBookmarked(activeTopic.id));
       setActiveTopicIdPref(activeTopic.id);
       recordRecentlyViewed({
@@ -859,13 +860,30 @@ export default function EncyclopediaHub({ onNavigateToSection }) {
             <div>
               {/* TOP READING CONTROLS & BREADCRUMBS */}
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-4 border-b border-slate-800">
-                <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
-                  <span className="text-emerald-400 font-bold">Encyclopedia</span>
-                  <span>/</span>
-                  <span className="text-slate-300">{activeTopic.categoryName}</span>
-                  <span>/</span>
-                  <span className="text-white font-semibold">#{activeTopic.id.toString().padStart(2, '0')}</span>
-                </div>
+                <nav aria-label="Article Breadcrumbs" className="flex items-center gap-1.5 text-xs font-mono text-slate-400 flex-wrap">
+                  <a 
+                    href="#home" 
+                    className="hover:text-emerald-400 transition-colors text-slate-400"
+                    title="Return to Portal Home"
+                  >
+                    Home
+                  </a>
+                  <span className="text-slate-600">/</span>
+                  <button 
+                    onClick={() => {
+                      playClick();
+                      setSelectedCategory(activeTopic.categoryId);
+                    }}
+                    className="hover:text-emerald-400 transition-colors text-slate-300"
+                    title={`Filter by ${activeTopic.categoryName}`}
+                  >
+                    {activeTopic.categoryName}
+                  </button>
+                  <span className="text-slate-600">/</span>
+                  <span className="text-emerald-400 font-bold truncate max-w-[200px] sm:max-w-xs" title={activeTopic.title}>
+                    #{activeTopic.id.toString().padStart(2, '0')} {activeTopic.title}
+                  </span>
+                </nav>
 
                 <div className="flex items-center gap-2 text-xs">
                   {/* Private Local Bookmark Button */}
@@ -1140,6 +1158,39 @@ export default function EncyclopediaHub({ onNavigateToSection }) {
               {/* ARTICLE FOOTER & PREVIOUS / NEXT NAVIGATION */}
               <div className="pt-6 border-t border-slate-800 space-y-6">
                 
+                {/* RELATED TOPICS & SUBSEQUENT GUIDES */}
+                {activeTopic.relatedTopicIds && activeTopic.relatedTopicIds.length > 0 && (
+                  <div>
+                    <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono flex items-center gap-2 mb-3">
+                      <Compass className="w-4 h-4 text-emerald-400" />
+                      Related Topics &amp; Subsequent Mechanics
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      {activeTopic.relatedTopicIds.map(relId => {
+                        const relTopic = topicsByIdMap.get(relId);
+                        if (!relTopic) return null;
+                        return (
+                          <div
+                            key={relId}
+                            onClick={() => handleSelectTopic(relTopic.id)}
+                            className="p-3 rounded-xl bg-slate-950/80 hover:bg-slate-800/80 border border-slate-800 hover:border-emerald-500/50 cursor-pointer transition-all flex items-center justify-between group"
+                          >
+                            <div className="min-w-0 pr-2">
+                              <span className="text-[10px] font-mono text-emerald-400 block truncate">
+                                {relTopic.categoryName} • #{relTopic.id.toString().padStart(2, '0')}
+                              </span>
+                              <span className="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition-colors line-clamp-1">
+                                {relTopic.title}
+                              </span>
+                            </div>
+                            <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition-transform shrink-0" />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
                 {/* PREVIOUS & NEXT TOPIC BUTTONS */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {prevTopic ? (

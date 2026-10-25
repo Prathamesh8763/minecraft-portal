@@ -2,7 +2,19 @@
 // Generates authentic click, pop, chime, and level-up sounds in-browser without external asset lag!
 
 let audioCtx = null;
-let soundEnabled = true;
+let soundEnabled = false;
+
+// Check user's stored audio preference (muted by default to respect accessibility guidance)
+if (typeof window !== 'undefined') {
+  try {
+    const saved = localStorage.getItem('mc_sound_enabled');
+    if (saved !== null) {
+      soundEnabled = JSON.parse(saved);
+    }
+  } catch {
+    soundEnabled = false;
+  }
+}
 
 function getAudioContext() {
   if (!audioCtx && typeof window !== 'undefined') {
@@ -19,6 +31,9 @@ function getAudioContext() {
 
 export function toggleSound() {
   soundEnabled = !soundEnabled;
+  try {
+    localStorage.setItem('mc_sound_enabled', JSON.stringify(soundEnabled));
+  } catch {}
   if (soundEnabled) {
     playLevelUp();
   }

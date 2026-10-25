@@ -28,6 +28,7 @@ const ResourcePackStudio = lazy(() => import('./components/ResourcePackStudio'))
 const RedstoneLab = lazy(() => import('./components/RedstoneLab'));
 const ModdingHub = lazy(() => import('./components/ModdingHub'));
 const FeedbackHub = lazy(() => import('./components/FeedbackHub'));
+const SurvivalChecklistModule = lazy(() => import('./components/SurvivalChecklistModule'));
 
 export default function App() {
   // Navigation State with resilient URL Hash sync
@@ -72,6 +73,18 @@ export default function App() {
     return () => window.removeEventListener('scroll', checkScroll);
   }, []);
 
+  // Meaningful document.title updates for browser tabs
+  useEffect(() => {
+    if (activeSection === 'home') {
+      document.title = 'Minecraft Java Edition Portal & Encyclopedia | Java 26.3 Wilderness Bound';
+    } else {
+      const section = NAVIGATION_ITEMS.find(i => i.id === activeSection);
+      if (section) {
+        document.title = `${section.fullTitle} | Minecraft Java Codex`;
+      }
+    }
+  }, [activeSection]);
+
   // Central Navigation Dispatcher
   const handleNavigate = (sectionId) => {
     setActiveSection(sectionId);
@@ -102,6 +115,7 @@ export default function App() {
       case 'resourcepacks': return <ResourcePackStudio />;
       case 'redstone': return <RedstoneLab />;
       case 'modding': return <ModdingHub />;
+      case 'checklists': return <SurvivalChecklistModule onNavigateToSection={handleNavigate} />;
       case 'feedback': return <FeedbackHub />;
       default: return null;
     }
