@@ -46,12 +46,22 @@ import {
 } from 'lucide-react';
 import { playClick, playPop, playLevelUp } from '../utils/soundFX';
 import { useDebounce, precomputeSearchIndex, buildIdMap } from '../utils/searchEngine';
+import { 
+  isItemBookmarked, 
+  toggleSavedBookmark, 
+  recordRecentlyViewed, 
+  setActiveTopicIdPref, 
+  getActiveTopicIdPref 
+} from '../utils/playerStorage';
 
 export default function EncyclopediaHub({ onNavigateToSection }) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedQuery = useDebounce(searchQuery, 120); // Prevents render thrashing during rapid typing
-  const [activeTopicId, setActiveTopicId] = useState(1);
+  const [activeTopicId, setActiveTopicId] = useState(() => {
+    return getActiveTopicIdPref() || 1;
+  });
+  const [isBookmarked, setIsBookmarked] = useState(false);
   const [activePopularGuide, setActivePopularGuide] = useState(null);
   const [selectedResultIndex, setSelectedResultIndex] = useState(0);
   const [copiedCommandIndex, setCopiedCommandIndex] = useState(null);
@@ -199,6 +209,26 @@ export default function EncyclopediaHub({ onNavigateToSection }) {
     setSelectedResultIndex(0);
   }, [searchResults.length]);
 
+  // Synchronize local bookmark status and record recent history whenever activeTopic changes
+  useEffect(() => {
+    if (activeTopic) {
+      setIsBookmarked(isItemBookmarked(activeTopic.id));
+      setActiveTopicIdPref(activeTopic.id);
+      recordRecentlyViewed({
+        id: activeTopic.id,
+        title: activeTopic.title,
+        category: activeTopic.categoryName,
+        route: 'encyclopedia'
+      });
+    }
+  }, [activeTopic?.id]);
+
+  const handleToggleBookmark = () => {
+    playPop();
+    const nextSaved = toggleSavedBookmark(activeTopic.id);
+    setIsBookmarked(nextSaved);
+  };
+
   // Keyboard navigation for search results
   const handleKeyDown = (e) => {
     if (!searchResults.length) return;
@@ -238,6 +268,7 @@ export default function EncyclopediaHub({ onNavigateToSection }) {
     playClick();
     setActivePopularGuide(null);
     setActiveTopicId(id);
+    setActiveTopicIdPref(id);
     setActiveHeadingId('');
     const el = document.getElementById('encyclopedia-reader-zone');
     if (el && window.innerWidth < 1024) {
@@ -837,6 +868,20 @@ export default function EncyclopediaHub({ onNavigateToSection }) {
                 </div>
 
                 <div className="flex items-center gap-2 text-xs">
+                  {/* Private Local Bookmark Button */}
+                  <button
+                    onClick={handleToggleBookmark}
+                    className={`px-2.5 py-1 rounded-lg border flex items-center gap-1.5 font-mono text-[11px] transition-all ${
+                      isBookmarked
+                        ? 'bg-amber-950/80 text-amber-300 border-amber-500/60 shadow-sm'
+                        : 'bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border-slate-700'
+                    }`}
+                    title={isBookmarked ? 'Remove Bookmark (Stored Locally)' : 'Save Guide to Bookmarks (Private, Zero Login)'}
+                  >
+                    <Bookmark className={`w-3.5 h-3.5 ${isBookmarked ? 'fill-amber-400 text-amber-400' : 'text-slate-400'}`} />
+                    <span>{isBookmarked ? 'Saved' : 'Bookmark'}</span>
+                  </button>
+
                   {/* Reading Width Preference Toggle */}
                   <button
                     onClick={() => {

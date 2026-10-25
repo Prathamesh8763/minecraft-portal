@@ -143,3 +143,74 @@ export function querySearchIndex(indexedItems, rawQuery, maxResults = 40) {
 
   return results;
 }
+
+/**
+ * Natural Player Query Resolvers
+ * Connects conversational player inquiries (e.g. "how to get mending", "too expensive")
+ * with exact mechanics, aliases, and canonical guides.
+ */
+export const NATURAL_QUERY_ALIASES = [
+  {
+    patterns: ['how to get mending', 'where to find mending', 'mending book', 'mending trade', 'mending'],
+    targetTokens: ['mending', 'enchantment'],
+    intentBadge: 'Librarian Trading & Fishing',
+    targetRoute: 'enchanting',
+    title: 'How to Obtain Mending & God Books'
+  },
+  {
+    patterns: ['villager trade reset', 'reset trades', 'change villager job', 'cure villager', 'trade reset'],
+    targetTokens: ['trading', 'villager', 'workstation'],
+    intentBadge: 'Workstation Mechanics',
+    targetRoute: 'trading',
+    title: 'Villager Workstation Linking & Trade Resetting'
+  },
+  {
+    patterns: ['best mace enchantments', 'mace build', 'smash damage', 'wind burst', 'mace enchants'],
+    targetTokens: ['mace', 'density', 'breach', 'wind burst'],
+    intentBadge: 'Mace Kinetic Mechanics',
+    targetRoute: 'enchanting',
+    title: 'Optimal 1.21 Heavy Mace Enchantment Build'
+  },
+  {
+    patterns: ['god armor', 'best armor', 'maximum protection', 'unbreakable armor', 'armor build'],
+    targetTokens: ['god armor', 'netherite', 'protection'],
+    intentBadge: 'Definitive Armor Meta',
+    targetRoute: 'enchanting',
+    title: 'Full 4-Piece God Armor Set Blueprint'
+  },
+  {
+    patterns: ['too expensive', 'anvil limit', 'anvil penalty', 'work penalty', 'anvil too expensive'],
+    targetTokens: ['anvil', 'too expensive', 'binary tree'],
+    intentBadge: 'Prior Work Optimization',
+    targetRoute: 'enchanting',
+    title: 'Anvil Binary Merge Tree (Avoid "Too Expensive!")'
+  },
+  {
+    patterns: ['iron farm', 'iron golem spawn', 'poppy farm', 'infinite iron'],
+    targetTokens: ['iron farm', 'golem', 'crafting'],
+    intentBadge: 'Automation Blueprint',
+    targetRoute: 'crafting',
+    title: 'Iron Golem Spawning & Mass Iron Farm'
+  },
+  {
+    patterns: ['straw bed', 'sleep without spawn', 'skip night', 'nomad bed'],
+    targetTokens: ['straw bed', 'camping', 'wilderness'],
+    intentBadge: 'Java 26.3 Wilderness Bound',
+    targetRoute: 'drops',
+    title: 'Straw Bed Camping (Skip Night Without Resetting Spawn)'
+  }
+];
+
+export function resolveNaturalPlayerQuery(rawQuery) {
+  if (!rawQuery || typeof rawQuery !== 'string') return null;
+  const q = rawQuery.toLowerCase().trim();
+  if (q.length < 3) return null;
+
+  for (let i = 0; i < NATURAL_QUERY_ALIASES.length; i++) {
+    const alias = NATURAL_QUERY_ALIASES[i];
+    if (alias.patterns.some(p => q.includes(p) || p.includes(q))) {
+      return alias;
+    }
+  }
+  return null;
+}

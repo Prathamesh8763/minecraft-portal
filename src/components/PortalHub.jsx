@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { NAVIGATION_CATEGORIES, NAVIGATION_ITEMS } from '../data/navigationRoutes';
 import { POPULAR_GUIDES, RECENTLY_UPDATED_ENTRIES } from '../data/minecraftEncyclopediaData';
 import { GAME_VERSION_CONFIG } from '../data/versionConfig';
@@ -20,15 +20,44 @@ import {
   Shield,
   Clock,
   CheckCircle2,
-  X
+  X,
+  Bookmark,
+  History,
+  Trash2,
+  ArrowUpRight
 } from 'lucide-react';
-import { playClick, playPop } from '../utils/soundFX';
-import { useDebounce, precomputeSearchIndex, buildCategoryMultiMap } from '../utils/searchEngine';
+import { playClick, playPop, playLevelUp } from '../utils/soundFX';
+import { useDebounce, precomputeSearchIndex, buildCategoryMultiMap, resolveNaturalPlayerQuery } from '../utils/searchEngine';
+import { getSavedBookmarks, getRecentlyViewed, clearAllPlayerData, setActiveTopicIdPref } from '../utils/playerStorage';
 
 export default function PortalHub({ onSelectSection, onToggleViewMode, viewMode }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedQuery = useDebounce(searchQuery, 120);
+
+  // Local storage bookmarks & recent history (100% private, zero accounts required)
+  const [recentList, setRecentList] = useState([]);
+  const [savedBookmarks, setSavedBookmarks] = useState([]);
+
+  useEffect(() => {
+    setRecentList(getRecentlyViewed(4));
+    setSavedBookmarks(getSavedBookmarks());
+  }, []);
+
+  const handleClearHistory = () => {
+    playClick();
+    clearAllPlayerData();
+    setRecentList([]);
+    setSavedBookmarks([]);
+  };
+
+  const handleOpenRecent = (item) => {
+    playClick();
+    if (item.id) {
+      setActiveTopicIdPref(item.id);
+    }
+    onSelectSection(item.route || 'encyclopedia');
+  };
 
   // Precomputed search index for navigation items (calculated once in O(N) time)
   const indexedNavItems = useMemo(() => {
@@ -55,6 +84,11 @@ export default function PortalHub({ onSelectSection, onToggleViewMode, viewMode 
   const categoryMultiMap = useMemo(() => {
     return buildCategoryMultiMap(NAVIGATION_ITEMS, 'categoryId');
   }, []);
+
+  // Natural query match based on conversational player inquiries
+  const naturalMatch = useMemo(() => {
+    return resolveNaturalPlayerQuery(debouncedQuery);
+  }, [debouncedQuery]);
 
   // 1. Omnisearch filtering across navigation items, popular guides, and topics
   const searchResults = useMemo(() => {
@@ -161,7 +195,39 @@ export default function PortalHub({ onSelectSection, onToggleViewMode, viewMode 
               </button>
             </div>
 
-            {searchResults.totalCount === 0 ? (
+            {/* Direct Conversational Answer / Natural Match */}
+            {naturalMatch && (
+              <div 
+                onClick={() => {
+                  playLevelUp();
+                  onSelectSection(naturalMatch.targetRoute);
+                }}
+                className="p-4 rounded-2xl bg-gradient-to-r from-emerald-950/80 via-[#18231c] to-[#12131b] border-2 border-emerald-500/60 hover:border-emerald-400 cursor-pointer transition-all shadow-xl flex items-center justify-between group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-900/60 border border-emerald-400/40 flex items-center justify-center shrink-0">
+                    <Sparkles className="w-5 h-5 text-emerald-300 animate-pulse" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-900/50 text-emerald-300 border border-emerald-500/30">
+                        {naturalMatch.intentBadge}
+                      </span>
+                      <span className="text-[10px] font-mono text-zinc-400">Direct Answer Match</span>
+                    </div>
+                    <h4 className="font-bold text-sm sm:text-base text-white group-hover:text-emerald-300 transition-colors mt-0.5">
+                      {naturalMatch.title}
+                    </h4>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400 shrink-0 ml-3">
+                  <span className="hidden sm:inline">Open Guide</span>
+                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            )}
+
+            {searchResults.totalCount === 0 && !naturalMatch ? (
               <div className="text-center py-6 text-zinc-400 text-xs font-mono">
                 No direct matches found. Try searching for general terms like "armor", "sword", "nether", or browse categories below.
               </div>
@@ -185,6 +251,47 @@ export default function PortalHub({ onSelectSection, onToggleViewMode, viewMode 
                 ))}
               </div>
             )}
+          </div>
+        )}
+
+        {/* Resume Where You Left Off (Local & 100% Private) */}
+        {!searchResults && recentList.length > 0 && (
+          <div className="max-w-3xl mx-auto mt-6 pt-5 border-t border-[#252636] animate-fadeIn">
+            <div className="flex items-center justify-between mb-3 text-xs font-mono">
+              <div className="flex items-center gap-2 text-zinc-300">
+                <History className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="font-bold tracking-wider text-emerald-400 uppercase">RESUME WHERE YOU LEFT OFF</span>
+                <span className="text-zinc-500 hidden sm:inline">(Local &amp; Private)</span>
+              </div>
+              <button
+                onClick={handleClearHistory}
+                className="text-zinc-500 hover:text-red-400 flex items-center gap-1 transition-colors"
+                title="Clear recent viewing history from browser storage"
+              >
+                <Trash2 className="w-3 h-3" />
+                <span className="text-[11px]">Clear</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {recentList.map((item, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => handleOpenRecent(item)}
+                  className="p-2.5 rounded-xl bg-[#171824] hover:bg-[#202232] border border-[#2e3042] hover:border-emerald-500/50 cursor-pointer transition-all flex items-center justify-between group text-left"
+                >
+                  <div className="min-w-0 pr-2">
+                    <span className="text-[10px] font-mono text-emerald-400 block truncate">
+                      {item.category}
+                    </span>
+                    <span className="font-semibold text-xs sm:text-sm text-white group-hover:text-emerald-300 truncate block">
+                      {item.title}
+                    </span>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-emerald-400 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
