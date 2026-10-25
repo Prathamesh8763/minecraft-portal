@@ -1,5 +1,6 @@
 import React from 'react';
 import { NAVIGATION_ITEMS, getSectionById, getAdjacentSections } from '../data/navigationRoutes';
+import { GAME_VERSION_CONFIG } from '../data/versionConfig';
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -16,11 +17,13 @@ export function PageHeaderNav({ currentSectionId, onNavigateHome, onSelectSectio
 
   if (!currentSection) return null;
 
+  const compat = GAME_VERSION_CONFIG.toolCompatibility[currentSectionId];
+
   return (
     <div className="pt-24 sm:pt-28 pb-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="bg-[#14151f]/90 border-2 border-[#2b2d3d] rounded-2xl p-4 sm:p-5 shadow-xl backdrop-blur-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         
-        {/* Left: Breadcrumbs & Return Button */}
+        {/* Left: Breadcrumbs, Title & Version Compatibility */}
         <div className="space-y-1">
           <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 flex-wrap">
             <button
@@ -39,6 +42,17 @@ export function PageHeaderNav({ currentSectionId, onNavigateHome, onSelectSectio
           <h1 className="text-lg sm:text-2xl font-extrabold text-white tracking-tight flex items-center gap-2">
             <span>{currentSection.fullTitle}</span>
           </h1>
+
+          {/* Explicit Version Compatibility & Last-Verified Tag */}
+          <div className="flex items-center gap-2 pt-0.5 text-xs font-mono text-zinc-400 flex-wrap">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-[10px] font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span>Supported: {compat ? compat.versionBadge : 'Java 1.0 – 26.3+'}</span>
+            </span>
+            <span className="text-[10px] text-zinc-400">
+              Last Verified: {compat?.lastVerified || 'October 2026'}
+            </span>
+          </div>
         </div>
 
         {/* Right: Quick Controls */}

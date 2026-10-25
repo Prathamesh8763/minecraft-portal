@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowUp, Heart, Sparkles } from 'lucide-react';
+import { ArrowUp, Heart, Sparkles, ExternalLink } from 'lucide-react';
 import { playLevelUp, playClick } from '../utils/soundFX';
+import { GAME_VERSION_CONFIG } from '../data/versionConfig';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -39,7 +40,7 @@ export default function Footer() {
                 </span>
               </span>
               <p className="text-[11px] text-zinc-400 font-mono mt-0.5">
-                Verified against official Java 26.3 Wilderness Bound (Game Drop 3) &amp; Java 26.4 Snapshot 5 changelogs.
+                Verified against official <a href={GAME_VERSION_CONFIG.currentStable.changelogUrl} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline">{GAME_VERSION_CONFIG.currentStable.version} {GAME_VERSION_CONFIG.currentStable.name}</a> &amp; <a href={GAME_VERSION_CONFIG.activeSnapshot.changelogUrl} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">{GAME_VERSION_CONFIG.activeSnapshot.fullSnapshotId}</a> changelogs.
               </p>
             </div>
           </div>

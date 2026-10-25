@@ -41,7 +41,7 @@ export const NAVIGATION_CATEGORIES = [
   {
     id: 'media',
     label: 'Vault & Visuals',
-    shortLabel: 'Vault & Packs',
+    shortLabel: 'Vault',
     icon: Eye,
     badge: '2 Sections',
     itemIds: ['icons', 'resourcepacks']
@@ -49,7 +49,7 @@ export const NAVIGATION_CATEGORIES = [
   {
     id: 'tech',
     label: 'Technical & Engineering',
-    shortLabel: 'Technical',
+    shortLabel: 'Tech',
     icon: Cpu,
     badge: '2 Sections',
     itemIds: ['redstone', 'modding']

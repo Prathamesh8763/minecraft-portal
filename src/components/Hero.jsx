@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Sparkles, ArrowRight, Shield, Zap, Compass, Award } from 'lucide-react';
+import { Sparkles, ArrowRight, Shield, Zap, Compass, Award, ExternalLink } from 'lucide-react';
 import { playClick, playPop, playLevelUp } from '../utils/soundFX';
 import confetti from 'canvas-confetti';
+import { GAME_VERSION_CONFIG } from '../data/versionConfig';
 
 export default function Hero() {
   const [hearts, setHearts] = useState(10);
@@ -53,7 +54,7 @@ export default function Hero() {
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#1b1c24] border border-[#3b3c4f] shadow-lg">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
               <span className="font-silkscreen text-[11px] text-[#4aedd9] tracking-wider">
-                JAVA 26.3 WILDERNESS BOUND (STABLE) // 26.4 SNAPSHOT 5
+                {GAME_VERSION_CONFIG.currentStable.version} {GAME_VERSION_CONFIG.currentStable.name.toUpperCase()} (STABLE) // {GAME_VERSION_CONFIG.activeSnapshot.fullSnapshotId.toUpperCase()}
               </span>
             </div>
 
@@ -66,7 +67,7 @@ export default function Hero() {
             {/* Subtitle */}
             <p className="text-zinc-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
               Experience the authoritative, factual knowledge base of Minecraft Java Edition. Track official 
-              <strong className="text-emerald-400 font-semibold"> Game Drops (Wilderness Bound)</strong>, explore 
+              <strong className="text-emerald-400 font-semibold"> {GAME_VERSION_CONFIG.currentStable.name} ({GAME_VERSION_CONFIG.currentStable.dropLabel})</strong>, explore 
               <strong className="text-cyan-400 font-semibold"> Dappled Forests &amp; Trial Chambers</strong>, master the 
               <strong className="text-yellow-400 font-semibold"> 3×3 Crafter &amp; Straw Beds</strong>, and simulate brewing with zero latency.
             </p>
@@ -197,7 +198,7 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Key Highlights Table */}
+              {/* Key Highlights Table - Sourced from official changelogs */}
               <div className="space-y-2 text-xs font-mono">
                 <div className="flex items-center justify-between p-2 bg-[#13131a] rounded border border-[#252532]">
                   <span className="text-zinc-400">CURRENT ENGINE:</span>
@@ -205,11 +206,29 @@ export default function Hero() {
                 </div>
                 <div className="flex items-center justify-between p-2 bg-[#13131a] rounded border border-[#252532]">
                   <span className="text-zinc-400">ACTIVE SNAPSHOT:</span>
-                  <span className="text-[#38bdf8] font-semibold">24w40a+ (Pale Garden)</span>
+                  <a 
+                    href={GAME_VERSION_CONFIG.activeSnapshot.changelogUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#38bdf8] font-semibold hover:underline flex items-center gap-1"
+                    title="View official snapshot changelog"
+                  >
+                    <span>{GAME_VERSION_CONFIG.activeSnapshot.fullSnapshotId}</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
                 </div>
                 <div className="flex items-center justify-between p-2 bg-[#13131a] rounded border border-[#252532]">
                   <span className="text-zinc-400">LATEST STABLE:</span>
-                  <span className="text-[#5c8e32] font-semibold">1.21.3 Bundles of Bravery</span>
+                  <a 
+                    href={GAME_VERSION_CONFIG.currentStable.changelogUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#5c8e32] font-semibold hover:underline flex items-center gap-1"
+                    title="View official release changelog"
+                  >
+                    <span>{GAME_VERSION_CONFIG.currentStable.version} ({GAME_VERSION_CONFIG.currentStable.name})</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
                 </div>
               </div>
 

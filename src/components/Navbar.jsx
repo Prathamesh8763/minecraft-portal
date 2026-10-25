@@ -4,6 +4,7 @@ import {
   NAVIGATION_ITEMS, 
   getSectionById 
 } from '../data/navigationRoutes';
+import { GAME_VERSION_CONFIG } from '../data/versionConfig';
 import { 
   Volume2, 
   VolumeX, 
@@ -113,17 +114,17 @@ export default function Navbar({
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-x-clip">
         {/* Main Navigation Bar */}
         <nav 
           aria-label="Main Navigation"
           className={`transition-all duration-300 ${
             scrolled 
               ? 'bg-[#101117]/95 backdrop-blur-md border-b-2 border-[#222330] py-2 shadow-2xl' 
-              : 'bg-gradient-to-b from-[#0a0b0f]/98 via-[#0c0d12]/85 to-transparent py-3'
+              : 'bg-gradient-to-b from-[#0a0b0f]/98 via-[#0c0d12]/85 to-transparent py-2.5 sm:py-3'
           }`}
         >
-          <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
+          <div className="max-w-7xl mx-auto px-2.5 sm:px-4 lg:px-6 flex items-center justify-between gap-2 lg:gap-3">
             
             {/* BRAND / LOGO */}
             <div 
@@ -147,10 +148,10 @@ export default function Navbar({
                 <div className="flex items-center gap-1.5">
                   <span className="font-pixel text-xs sm:text-sm text-white tracking-wider mc-shadow">MINECRAFT</span>
                   <span 
-                    title="Java 26.3 Wilderness Bound (Current Stable Release)"
-                    className="text-[9px] font-silkscreen px-1 py-0.2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded"
+                    title={`${GAME_VERSION_CONFIG.currentStable.fullBadge} — ${GAME_VERSION_CONFIG.currentStable.name}`}
+                    className="text-[9px] font-silkscreen px-1 py-0.2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded shrink-0"
                   >
-                    26.3 STABLE
+                    {GAME_VERSION_CONFIG.currentStable.badgeText}
                   </span>
                 </div>
                 <p className="text-[9px] text-zinc-400 font-mono tracking-tight hidden sm:block">JAVA EDITION CODEX</p>
@@ -160,13 +161,13 @@ export default function Navbar({
             {/* DESKTOP CATEGORY NAVIGATION (MEGA DROPDOWNS) */}
             <div 
               ref={dropdownRef} 
-              className="hidden lg:flex items-center gap-1.5 bg-[#161720]/90 p-1.5 rounded-xl border-2 border-[#282937] shadow-inner"
+              className="hidden lg:flex items-center gap-1 bg-[#161720]/90 p-1 rounded-xl border border-[#282937] shadow-inner shrink-0"
             >
               {/* Home Link */}
               <button
                 onClick={handleLogoClick}
                 aria-current={activeSection === 'home' ? 'page' : undefined}
-                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-silkscreen rounded-lg transition-all focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none ${
+                className={`whitespace-nowrap shrink-0 flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-silkscreen rounded-lg transition-all focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none ${
                   activeSection === 'home'
                     ? 'bg-[#5c8e32] text-white shadow-md border border-[#89c44e]'
                     : 'text-zinc-400 hover:text-white hover:bg-[#222330]'
@@ -191,7 +192,7 @@ export default function Navbar({
                       }}
                       aria-expanded={isDropdownOpen}
                       aria-haspopup="true"
-                      className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-silkscreen rounded-lg transition-all focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none ${
+                      className={`whitespace-nowrap shrink-0 flex items-center gap-1 px-2.5 py-1.5 text-xs font-silkscreen rounded-lg transition-all focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none ${
                         isCatActive
                           ? 'bg-[#5c8e32] text-white shadow-md border border-[#89c44e]'
                           : isDropdownOpen
@@ -253,8 +254,8 @@ export default function Navbar({
               })}
             </div>
 
-            {/* RIGHT UTILITIES: SEARCH, VIEW MODE, SFX, LEVEL & MOBILE HAMBURGER */}
-            <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+            {/* RIGHT UTILITIES: COMPACT SEARCH, VIEW MODE, SFX, LEVEL & MOBILE HAMBURGER */}
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               
               {/* Quick Search & Command Palette Button */}
               <button
@@ -262,13 +263,13 @@ export default function Navbar({
                   playClick();
                   setIsCommandPaletteOpen(true);
                 }}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#1b1c28] hover:bg-[#252738] border border-[#37394c] text-xs text-zinc-300 hover:text-white transition-all focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none"
-                title="Search sections (Ctrl+K)"
+                className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-xl bg-[#1b1c28] hover:bg-[#252738] border border-[#37394c] text-xs text-zinc-300 hover:text-white transition-all focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none"
+                title="Search encyclopedia (Ctrl+K)"
                 aria-label="Open search command palette"
               >
-                <Search className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="hidden xl:inline text-[11px] font-mono">Search Codex</span>
-                <kbd className="hidden sm:inline-block px-1.5 py-0.2 text-[9px] font-mono text-zinc-400 bg-black/50 border border-zinc-700 rounded">
+                <Search className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span className="hidden xl:inline text-[11px] font-mono">Search</span>
+                <kbd className="hidden sm:inline-block px-1 py-0.2 text-[9px] font-mono text-zinc-400 bg-black/50 border border-zinc-700 rounded">
                   Ctrl+K
                 </kbd>
               </button>
@@ -279,20 +280,21 @@ export default function Navbar({
                   playPop();
                   onToggleViewMode(viewMode === 'page' ? 'scroll' : 'page');
                 }}
-                className={`hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-[11px] font-mono font-semibold transition-all focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none ${
+                className={`hidden md:flex items-center gap-1 px-2 py-1.5 rounded-xl border text-[10px] font-mono font-semibold transition-all focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none shrink-0 ${
                   viewMode === 'page'
                     ? 'bg-emerald-950/80 border-emerald-500/50 text-emerald-300 shadow-sm'
                     : 'bg-cyan-950/80 border-cyan-500/50 text-cyan-300 shadow-sm'
                 }`}
                 title="Toggle between single page mode and continuous scroll mode"
               >
-                <Sliders className="w-3.5 h-3.5" />
-                <span>{viewMode === 'page' ? 'PAGE VIEW' : 'SCROLL ALL'}</span>
+                <Sliders className="w-3 h-3 shrink-0" />
+                <span className="hidden lg:inline">{viewMode === 'page' ? 'PAGE VIEW' : 'SCROLL ALL'}</span>
+                <span className="lg:hidden">{viewMode === 'page' ? 'PAGE' : 'SCROLL'}</span>
               </button>
 
               {/* Experience Level Pill */}
               <div 
-                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-[#131b0e] border border-[#3e6320] text-[10px] font-pixel text-[#80ff20] mc-shadow cursor-default"
+                className="hidden sm:flex items-center gap-1 px-2 py-1 rounded-xl bg-[#131b0e] border border-[#3e6320] text-[10px] font-pixel text-[#80ff20] mc-shadow cursor-default shrink-0"
                 title={`Exploration XP: Level ${currentLevel} (${Math.round(scrollProgress)}% explored)`}
               >
                 <span>LVL</span>
@@ -304,20 +306,20 @@ export default function Navbar({
                 onClick={handleSoundToggle}
                 title={soundOn ? "Mute Web Audio SFX" : "Enable Web Audio SFX"}
                 aria-label={soundOn ? "Mute Sound Effects" : "Enable Sound Effects"}
-                className={`p-1.5 sm:px-2.5 sm:py-1 rounded-xl border-2 transition-all flex items-center gap-1.5 text-xs font-mono focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none ${
+                className={`p-1.5 sm:px-2 sm:py-1 rounded-xl border transition-all flex items-center gap-1 text-xs font-mono focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none shrink-0 ${
                   soundOn 
                     ? 'bg-[#182613] text-[#9ee256] border-[#3e6320] hover:bg-[#233b1b]' 
                     : 'bg-[#291616] text-red-400 border-red-900/60 hover:bg-[#381f1f]'
                 }`}
               >
                 {soundOn ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
-                <span className="hidden lg:inline text-[10px] font-silkscreen">{soundOn ? 'SFX ON' : 'MUTED'}</span>
+                <span className="hidden 2xl:inline text-[10px] font-silkscreen">{soundOn ? 'SFX' : 'MUTED'}</span>
               </button>
 
               {/* Mobile Hamburger Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 bg-[#1b1c26] text-zinc-300 rounded-xl border border-[#353648] hover:bg-[#252636] transition-colors focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none"
+                className="lg:hidden p-1.5 bg-[#1b1c26] text-zinc-300 rounded-xl border border-[#353648] hover:bg-[#252636] transition-colors focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none shrink-0"
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-menu"
