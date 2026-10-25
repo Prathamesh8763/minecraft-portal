@@ -84,7 +84,7 @@ export const NAVIGATION_ITEMS = [
     categoryLabel: 'World & Ecology',
     icon: Sparkles,
     hash: '#drops',
-    desc: 'Explore official releases: Bundles of Bravery (1.21.2/1.21.3), Tricky Trials (1.21), Armored Paws (1.20.5), and Pale Garden snapshots (24w40a+).',
+    desc: 'Explore official releases: Java 26.3 Wilderness Bound (Stable), 26.1 Tiny Takeover, 1.21.3 Bundles of Bravery, and 26.4 Winter Drop snapshot previews.',
     badge: 'Official Chronology'
   },
   {

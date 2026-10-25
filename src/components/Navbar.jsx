@@ -146,8 +146,11 @@ export default function Navbar({
               <div>
                 <div className="flex items-center gap-1.5">
                   <span className="font-pixel text-xs sm:text-sm text-white tracking-wider mc-shadow">MINECRAFT</span>
-                  <span className="text-[9px] font-silkscreen px-1 py-0.2 bg-[#4aedd9]/20 text-[#4aedd9] border border-[#4aedd9]/40 rounded">
-                    1.21.3
+                  <span 
+                    title="Java 26.3 Wilderness Bound (Current Stable Release)"
+                    className="text-[9px] font-silkscreen px-1 py-0.2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded"
+                  >
+                    26.3 STABLE
                   </span>
                 </div>
                 <p className="text-[9px] text-zinc-400 font-mono tracking-tight hidden sm:block">JAVA EDITION CODEX</p>

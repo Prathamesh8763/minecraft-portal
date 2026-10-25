@@ -53,7 +53,7 @@ export default function Hero() {
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#1b1c24] border border-[#3b3c4f] shadow-lg">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
               <span className="font-silkscreen text-[11px] text-[#4aedd9] tracking-wider">
-                JAVA 1.21.3 STABLE // 24w40a+ SNAPSHOTS
+                JAVA 26.3 WILDERNESS BOUND (STABLE) // 26.4 SNAPSHOT 5
               </span>
             </div>
 
@@ -66,9 +66,9 @@ export default function Hero() {
             {/* Subtitle */}
             <p className="text-zinc-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
               Experience the authoritative, factual knowledge base of Minecraft Java Edition. Track official 
-              <strong className="text-emerald-400 font-semibold"> Game Drops</strong>, explore the 
-              <strong className="text-cyan-400 font-semibold"> Pale Garden & Trial Chambers</strong>, master the 
-              <strong className="text-yellow-400 font-semibold"> 3×3 Crafter</strong>, and simulate brewing with zero latency.
+              <strong className="text-emerald-400 font-semibold"> Game Drops (Wilderness Bound)</strong>, explore 
+              <strong className="text-cyan-400 font-semibold"> Dappled Forests &amp; Trial Chambers</strong>, master the 
+              <strong className="text-yellow-400 font-semibold"> 3×3 Crafter &amp; Straw Beds</strong>, and simulate brewing with zero latency.
             </p>
 
             {/* Call to Actions */}

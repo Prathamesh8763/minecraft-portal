@@ -1,15 +1,15 @@
 // Official Minecraft Java Edition Encyclopedia Data
-// 5 Logical Categories with Verified Sourcing (Canonical 1.0 to 1.21.3 + 24w40a+ Snapshots)
+// 5 Logical Categories with Verified Sourcing (Canonical 1.0 to 26.3 Wilderness Bound + 26.4 Snapshots)
 
 export const CURRENT_GAME_VERSION_STATUS = {
-  latestRelease: 'Minecraft Java Edition 1.21.3',
-  releaseDropName: 'Bundles of Bravery',
-  releaseDate: 'October 22, 2024',
-  activeSnapshots: '24w40a – 24w46a (The Pale Garden & The Creaking)',
-  releaseCadence: 'Frequent Themed Game Drops (Announced September 9, 2024)',
-  officialArticleUrl: 'https://www.minecraft.net/en-us/article/minecraft-java-edition-1-21-3',
-  wikiSourceUrl: 'https://minecraft.wiki/w/Java_Edition_version_history',
-  lastAuditDate: 'October 24, 2024'
+  latestRelease: 'Minecraft Java Edition 26.3',
+  releaseDropName: 'Wilderness Bound (Game Drop 3)',
+  releaseDate: 'September 15, 2026',
+  activeSnapshots: 'Java 26.4 Snapshot Preview (Snap 5)',
+  releaseCadence: 'Official Game Drops Model (Announced September 2024)',
+  officialArticleUrl: 'https://www.minecraft.net/en-us/updates/minecraft-updates-timeline-and-evolution',
+  wikiSourceUrl: 'https://feedback.minecraft.net/hc/en-us/sections/360001186971-Release-Changelogs',
+  lastAuditDate: 'October 25, 2026'
 };
 
 export const ENCYCLOPEDIA_CATEGORIES = [
@@ -32,7 +32,7 @@ export const ENCYCLOPEDIA_CATEGORIES = [
     color: 'teal',
     badge: '3 Dimensions',
     subtopics: 'Biomes · Mobs · Structures · Dimensions · Lore',
-    description: 'Dimensions, biomes, generated structures like Trial Chambers, hostile/passive mob bestiary, and environmental lore.',
+    description: 'Dimensions, biomes, generated structures like Trial Chambers and Abandoned Camps, hostile/passive mob bestiary, and environmental lore.',
     topicIds: [3, 4, 10, 18]
   },
   {
@@ -65,13 +65,37 @@ export const ENCYCLOPEDIA_CATEGORIES = [
     color: 'cyan',
     badge: 'Official Drops',
     subtopics: 'Version history · Current releases · Snapshots · Upcoming changes · Creators',
-    description: 'Complete Java 1.0 to 1.21.3 release notes, 24w40a+ Pale Garden snapshot tracking, Mojang Game Drops cadence, and community milestones.',
+    description: 'Official changelog release notes from 1.0 through 26.3 Wilderness Bound, active 26.4 Ice Caves snapshot tracking, and creator milestones.',
     topicIds: [2, 19]
   }
 ];
 
 // Curated Popular Guides with explicit definitions and direct jumps
 export const POPULAR_GUIDES = [
+  {
+    id: 'guide-wilderness-bound',
+    title: 'Wilderness Bound',
+    category: 'Game Drops',
+    parentCategoryId: 'versions',
+    topicId: 2,
+    summary: 'The official autumn-themed Game Drop released on September 15, 2026.',
+    details: 'Introduces the Dappled Forest biome, Poplar trees & wood family, Abandoned Camps with Explorer Maps, portable single-use Straw Beds that skip the night without resetting spawn, sit-able Cushions, and wool/concrete stairs & slabs.',
+    version: 'Java 26.3 Stable',
+    sourceUrl: 'https://feedback.minecraft.net/hc/en-us/sections/360001186971-Release-Changelogs',
+    toolId: 'drops'
+  },
+  {
+    id: 'guide-straw-bed',
+    title: 'Straw Bed',
+    category: 'Survival',
+    parentCategoryId: 'learn',
+    topicId: 12,
+    summary: 'A portable single-use bed for nomadic survival that skips the night without resetting spawn.',
+    details: 'Crafted from 3 Hay Bales. Designed for explorers on long expeditions; allows players to sleep through the night outdoors without changing their primary home bed or respawn anchor location.',
+    version: 'Java 26.3+',
+    sourceUrl: 'https://feedback.minecraft.net/hc/en-us/sections/360001186971-Release-Changelogs',
+    toolId: 'crafting'
+  },
   {
     id: 'guide-mending',
     title: 'Mending',
@@ -149,11 +173,38 @@ export const POPULAR_GUIDES = [
 // Recently verified entries with accurate editorial timestamps
 export const RECENTLY_UPDATED_ENTRIES = [
   {
+    title: 'Java 26.3: Wilderness Bound',
+    versionBadge: 'Java 26.3 Stable',
+    date: 'September 15, 2026',
+    type: 'Official Release',
+    summary: 'Official Game Drop adding Dappled Forest, Poplar trees, Abandoned Camps, Straw Beds, Cushions, and 16-color wool/concrete stairs & slabs.',
+    sourceUrl: 'https://feedback.minecraft.net/hc/en-us/sections/360001186971-Release-Changelogs',
+    topicId: 2
+  },
+  {
+    title: 'Java 26.4 Snapshot Preview (Snap 5)',
+    versionBadge: 'Snapshot 26.4 (Testing)',
+    date: 'October 2026',
+    type: 'Testing Snapshot',
+    summary: 'Active testing of subterranean Ice Caves, speleothem Icicles, Ice Crystals, Frostbite mob throwing Ice Balls, Packed Ice Bricks, and Vulkan rendering.',
+    sourceUrl: 'https://feedback.minecraft.net/hc/en-us/sections/360002267532',
+    topicId: 2
+  },
+  {
+    title: 'Java 26.1: Tiny Takeover',
+    versionBadge: 'Java 26.1 Stable',
+    date: 'March 2026',
+    type: 'Official Release',
+    summary: 'Technical backend refactoring, mob despawning fixes, entity scale fine-tuning, and memory optimizations.',
+    sourceUrl: 'https://feedback.minecraft.net/hc/en-us/sections/360001186971-Release-Changelogs',
+    topicId: 2
+  },
+  {
     title: 'Java 1.21.3: Bundles of Bravery',
     versionBadge: 'Java 1.21.3 Stable',
     date: 'October 22, 2024',
     type: 'Official Release',
-    summary: 'Official release introducing Bundles crafted with 1 Leather + 1 String, 16 dye colors, and Bedrock Hardcore parity.',
+    summary: 'The Bundle item in 16 dye colors, Bedrock Hardcore parity, and comparator inventory reading.',
     sourceUrl: 'https://www.minecraft.net/en-us/article/minecraft-java-edition-1-21-3',
     topicId: 2
   },
@@ -272,47 +323,50 @@ export const ENCYCLOPEDIA_TOPICS = [
     categoryId: 'versions',
     categoryName: 'Versions & News',
     subtopicLabel: 'Version history · Current releases · Snapshots',
-    versionBadge: '1.0 to 1.21.3 + Snapshots',
-    applicableVersions: 'Java 1.0.0 – 1.21.3 + 24w40a+',
-    lastVerified: 'October 24, 2024 (Java 1.21.3)',
+    versionBadge: '1.0 to 26.3 + 26.4 Snapshots',
+    applicableVersions: 'Java 1.0.0 – 26.3 Stable + 26.4 Snapshots',
+    lastVerified: 'October 25, 2026 (Java 26.3 / Snap 5)',
     icon: 'history',
-    summary: 'Chronological roadmap of all major Java Edition releases from 1.0.0 to 1.21.3 Bundles of Bravery, and the official September 2024 transition to frequent Game Drops.',
+    summary: 'Chronological roadmap of all major Java Edition releases from 1.0.0 through 26.3 Wilderness Bound, and active 26.4 Winter Drop snapshot testing governed by the official Mojang Game Drops cadence.',
     keyFacts: [
-      'September 9, 2024: Mojang officially retired single annual updates in favor of frequent, focused "Game Drops" throughout the year.',
-      '1.21.2 / 1.21.3 "Bundles of Bravery" released October 22, 2024: officially added Bundles and 16 dye colors.',
-      '1.21 "Tricky Trials" released June 13, 2024: Trial Chambers, The Breeze, The Crafter, and The Heavy Mace.',
-      '1.20.5 "Armored Paws" released April 23, 2024: Armadillo, Wolf Armor, and migration to Data Components.',
-      'Upcoming Game Drop "The Pale Garden & The Creaking" in active snapshot testing (24w40a–24w46a).'
+      'September 15, 2026: Mojang released Java 26.3 "Wilderness Bound" adding the Dappled Forest, Poplar wood, Abandoned Camps, portable Straw Beds, and sit-able Cushions.',
+      'October 2026: Active snapshot testing for Java 26.4 (Winter Drop) introduces subterranean Ice Caves, the Frostbite mob, Icicles, Ice Crystals, and Vulkan rendering.',
+      'March 2026: Java 26.1 "Tiny Takeover" introduced technical entity-scaling refinements, leashed mob despawn fixes, and chunk ticking memory optimizations.',
+      'September 9, 2024: Mojang officially shifted development from slow annual mega-updates to frequent, focused "Game Drops" throughout each calendar year.'
     ],
     quickReference: [
-      { label: 'Latest Stable', value: 'Java 1.21.3 (October 22, 2024)' },
-      { label: 'Active Snapshots', value: '24w40a–24w46a (Pale Garden Drop)' },
+      { label: 'Latest Stable', value: 'Java 26.3 Wilderness Bound (Sep 15, 2026)' },
+      { label: 'Active Snapshots', value: 'Java 26.4 Snapshot Preview (Snap 5)' },
       { label: 'Cadence Model', value: 'Frequent Themed Game Drops (Announced Sep 2024)' },
-      { label: 'Official Source', value: 'minecraft.wiki/w/Java_Edition_version_history' }
+      { label: 'Official Changelogs', value: 'feedback.minecraft.net/hc/en-us/sections/360001186971' }
     ],
     sections: [
       {
         id: 'release-cadence',
-        title: '1. The New Release Cadence (September 9, 2024)',
-        content: 'Mojang Studios officially transitioned away from annual summer updates. New gameplay features are now shipped through regular, focused "Game Drops" as soon as they achieve quality parity, tested continuously through Java snapshots.',
+        title: '1. The Game Drops Release Cadence (Official Timeline)',
+        content: 'Mojang Studios delivers content through agile "Game Drops" as soon as features achieve quality parity. Confirmed stable drops are deployed to production, while experimental features are tested in public snapshots.',
         callout: {
-          type: 'note',
-          title: 'Snapshot Numbering Convention',
-          text: 'Snapshots use the format YYwWWa: YY is the 2-digit year (e.g. 24), w stands for week, WW is the calendar week (e.g. 40), and a is the iteration letter.'
+          type: 'edition',
+          title: 'Stable Releases vs. Snapshot Testing',
+          text: 'Official releases (e.g. 26.3 Wilderness Bound) are stable for general multiplayer and survival worlds. Snapshots (e.g. 26.4 Snap 5) are active public test builds subject to balance changes and experimental toggles.'
         }
       },
       {
         id: 'canonical-releases',
-        title: '2. Major Canonical Java Releases',
-        content: 'Verified history of landmark Java Edition releases defining modern gameplay:',
+        title: '2. Major Canonical Java Releases & Game Drops',
+        content: 'Verified chronology from official Mojang Studios release notes and evolution timelines:',
         table: {
-          headers: ['Version', 'Official Name', 'Release Date', 'Defining Mechanics'],
+          headers: ['Version', 'Official Name', 'Release Date', 'Defining Mechanics & Content'],
           rows: [
-            ['1.21.2 / 1.21.3', 'Bundles of Bravery', 'October 22, 2024', 'The Bundle (1 Leather + 1 String, 64 items), 16 dye colors, Bedrock Hardcore parity'],
-            ['1.21', 'Tricky Trials', 'June 13, 2024', 'Trial Chambers, The Crafter (auto-crafting), The Breeze, The Mace, Wind Charges, Vaults'],
-            ['1.20.5 / 1.20.6', 'Armored Paws', 'April 23, 2024', 'Armadillo, Wolf Armor (16 dyes), 8 Wolf variants, Data Components item format'],
-            ['1.20', 'Trails & Tales', 'June 7, 2023', 'Archaeology & Brush, Sniffer, Cherry Grove biome, 16 Armor Trims, Camels'],
-            ['1.19', 'The Wild Update', 'June 7, 2022', 'Deep Dark, The Warden, Sculk Shriekers, Ancient Cities, Mangrove Swamp, Frogs'],
+            ['26.4 (Snapshot 5)', 'Winter Drop [IN TESTING]', 'Active Testing (Oct 2026)', 'Ice Caves subterranean biome, Frostbite mob throwing Ice Balls, Icicles, Ice Crystals, Packed Ice Bricks, Vulkan API'],
+            ['26.3', 'Wilderness Bound', 'September 15, 2026', 'Dappled Forest biome, Poplar trees & wood set, Abandoned Camps, Straw Beds (portable sleep), Cushions, Wool/Concrete stairs & slabs'],
+            ['26.1', 'Tiny Takeover', 'March 2026', 'Entity scaling fine-tuning, leashed mob persistence fix, memory management for chunk ticking loops'],
+            ['1.21.4', 'The Pale Garden & Creaking', 'December 2024', 'Pale Garden biome, Pale Oak wood set, The Creaking mob, Creaking Heart block, Resin Clumps & Bricks, Eyeblossom'],
+            ['1.21.2 / 1.21.3', 'Bundles of Bravery', 'October 22, 2024', 'The Bundle (1 Leather + 1 String, 64 items), 16 dye colors, Bedrock Hardcore mode parity'],
+            ['1.21', 'Tricky Trials', 'June 13, 2024', 'Trial Chambers, The Crafter (auto-crafting), The Breeze, The Mace, Wind Charges, Ominous Vaults'],
+            ['1.20.5 / 1.20.6', 'Armored Paws', 'April 23, 2024', 'Armadillo, Wolf Armor (16 dyes), 8 Wolf variants, structured Data Components item format'],
+            ['1.20', 'Trails & Tales', 'June 7, 2023', 'Archaeology & Brush, Sniffer, Cherry Grove biome, 16 Armor Trims, Camels, Chiseled Bookshelves'],
+            ['1.19', 'The Wild Update', 'June 7, 2022', 'Deep Dark, The Warden, Sculk Shriekers, Ancient Cities, Mangrove Swamp, Frogs, Allay'],
             ['1.18', 'Caves & Cliffs: Part II', 'November 30, 2021', 'World height -64 to 320, 3D cave biomes, Lush Caves, Dripstone Caves, new terrain noise'],
             ['1.16', 'The Nether Update', 'June 23, 2020', 'Netherite tier, 5 Nether Biomes (Crimson, Warped, Soul Sand, Basalt), Piglins, Bastions'],
             ['1.14', 'Village & Pillage', 'April 23, 2019', 'Villager workstation overhaul, Raids, Crossbows, Pillager Outposts, Blast Furnace'],
@@ -333,26 +387,26 @@ export const ENCYCLOPEDIA_TOPICS = [
   {
     id: 3,
     slug: 'dimensions-biomes',
-    title: 'Dimensions & World Generation (Caves & Cliffs)',
+    title: 'Dimensions & World Generation (Caves, Cliffs & 26.3 Wilderness)',
     categoryId: 'world',
     categoryName: 'Explore the World',
     subtopicLabel: 'Biomes · Dimensions',
     versionBadge: '70+ Biomes / 3 Dimensions',
-    applicableVersions: 'Java 1.18+ (Caves & Cliffs Overhaul)',
-    lastVerified: 'October 24, 2024 (Java 1.21.3)',
+    applicableVersions: 'Java 1.18 – 26.3+ (Wilderness Bound)',
+    lastVerified: 'October 2026 (Java 26.3 Wilderness Bound & 26.4 Snapshot)',
     icon: 'map',
-    summary: 'Detailed mechanics of the three dimensions: The Overworld (Y=-64 to Y=320), The Nether (8:1 spatial compression ratio), and The End outer islands with End Cities and Elytra wings.',
+    summary: 'Detailed mechanics of the three dimensions: The Overworld (Y=-64 to Y=320), The Nether (8:1 spatial compression ratio), and The End outer islands, plus latest additions like the Dappled Forest (26.3) and experimental Ice Caves (26.4).',
     keyFacts: [
       '1.18 Caves & Cliffs overhaul increased Overworld build height by 50% (-64 bedrock floor to +320 sky ceiling).',
       'Nether coordinates compress space by 8:1 (1 block traveled in the Nether equals 8 blocks in the Overworld).',
-      'Cave noise biomes: Lush Caves (Glow Berries, Axolotls, Clay) and Dripstone Caves (Pointed Dripstone, Stalactites).',
-      'Deep Dark generates at Y=-52 or below, housing ancient city megastructures guarded by Sculk shriekers.'
+      'Dappled Forest (26.3 Wilderness Bound): Crisp autumn biome featuring tall Poplar trees, fallen leaves, and Abandoned Camps with explorer maps.',
+      'Cave noise biomes: Lush Caves, Dripstone Caves, Deep Dark (Y=-52), and experimental Ice Caves (26.4 Snapshot).'
     ],
     quickReference: [
       { label: 'Overworld Height', value: 'Y=-64 to Y=320 (384 total vertical blocks)' },
       { label: 'Nether Compression', value: '8:1 horizontal travel multiplier' },
-      { label: 'End Sub-biomes', value: '5 distinct biomes (Java Edition exclusive)' },
-      { label: 'Official Source', value: 'minecraft.wiki/w/Dimension' }
+      { label: 'Latest Stable Biome', value: 'Dappled Forest (26.3 Wilderness Bound)' },
+      { label: 'Official Source', value: 'minecraft.net/en-us/updates/minecraft-updates-timeline-and-evolution' }
     ],
     sections: [
       {
@@ -362,7 +416,7 @@ export const ENCYCLOPEDIA_TOPICS = [
         table: {
           headers: ['Dimension', 'Height Limits', 'Hazards & Rules', 'Primary Resources'],
           rows: [
-            ['The Overworld', 'Y=-64 to Y=320 (384 blocks)', 'Mob spawns at light 0; day/night cycle (20 mins)', 'All wood types, ores, food, villages, trial chambers'],
+            ['The Overworld', 'Y=-64 to Y=320 (384 blocks)', 'Mob spawns at light 0; day/night cycle (20 mins)', 'All wood types, ores, food, villages, trial chambers, dappled forests'],
             ['The Nether', 'Y=0 to Y=128 (Bedrock roof)', 'Water evaporates, beds explode, 8:1 coordinate compression', 'Netherite, Blaze Rods, Nether Wart, Quartz, Ancient Debris'],
             ['The End', 'Y=0 to Y=256 (Void below Y=0)', 'End void kills instantly, Ender Dragon boss, Enderman agro', 'Elytra wings, Shulker Shells, Chorus Fruit, Dragon Egg']
           ]
@@ -385,6 +439,19 @@ export const ENCYCLOPEDIA_TOPICS = [
           type: 'tip',
           title: 'Portal Linking Rule',
           text: 'To prevent portals from accidentally linking to a nearby destination, always calculate exact coordinates and build both portals manually, matching their X and Z values within 1 block.'
+        }
+      },
+      {
+        id: 'recent-biomes',
+        title: '3. Recent Biome Additions & Snapshots',
+        content: 'Officially verified releases and snapshot testing environments introduce new environmental regions:',
+        table: {
+          headers: ['Biome Name', 'Release Status', 'Elevation & Environment', 'Signature Blocks & Fauna'],
+          rows: [
+            ['Dappled Forest', 'Java 26.3 (Stable Release)', 'Overworld Temperate Surface', 'Poplar Wood set, fallen autumn leaf piles, abandoned camps, peaceful foxes & rabbits'],
+            ['Ice Caves', 'Java 26.4 (Active Snapshot)', 'Overworld Deep Underground', 'Stalactite icicles, slippery packed ice floors, Ice Crystals, Frostbite mob hazards'],
+            ['Pale Garden', 'Java 1.21.3 Snapshot Preview', 'Overworld Desaturated Forest', 'Pale Oak trees, Pale Moss carpets, The Creaking (Creaking Heart puppet)']
+          ]
         }
       }
     ],
@@ -793,35 +860,36 @@ export const ENCYCLOPEDIA_TOPICS = [
   {
     id: 10,
     slug: 'structures-dungeons',
-    title: 'Generated Structures & Dungeons',
+    title: 'Generated Structures & Dungeons (Chambers to Camps)',
     categoryId: 'world',
     categoryName: 'Explore the World',
     subtopicLabel: 'Structures · Dungeons',
-    versionBadge: 'Trial Chambers & Ancient Cities',
-    applicableVersions: 'Java 1.0.0 – 1.21.3+',
-    lastVerified: 'October 24, 2024 (Java 1.21.3)',
+    versionBadge: 'Trial Chambers & Abandoned Camps',
+    applicableVersions: 'Java 1.0.0 – 26.3+ (Wilderness Bound)',
+    lastVerified: 'October 2026 (Official Changelogs)',
     icon: 'castle',
-    summary: 'Procedurally generated architectural landmarks across all three dimensions: Trial Chambers, Ancient Cities, Strongholds, Ocean Monuments, Nether Fortresses, and End Cities.',
+    summary: 'Procedurally generated architectural landmarks across all three dimensions: Trial Chambers, Ancient Cities, Abandoned Camps, Strongholds, Ocean Monuments, Nether Fortresses, and End Cities.',
     keyFacts: [
+      'Abandoned Camps (26.3 Wilderness Bound): Surface campsites with straw beds, unlit campfires, and chests containing Explorer Maps to rare biomes and structures.',
       'Trial Chambers (1.21): Deepslate dungeons generating between Y=-20 and Y=-40 containing Trial Spawners, Ominous Vaults, and Heavy Cores.',
       'Ancient Cities (1.19): Colossal palace ruins generating at Y=-52 in the Deep Dark, containing Swift Sneak III and Silence armor trims.',
-      'Strongholds: Exactly 128 strongholds generate per Java world in concentric rings outwards from coordinate (0, 0).',
-      'Ocean Monuments: Massive underwater prismarine temples guarded by Elder Guardians inflicting Mining Fatigue III.'
+      'Strongholds: Exactly 128 strongholds generate per Java world in concentric rings outwards from coordinate (0, 0).'
     ],
     quickReference: [
+      { label: '26.3 Structure', value: 'Abandoned Camps (Explorer Maps & Straw Beds)' },
       { label: '1.21 Structure', value: 'Trial Chambers (Breeze, Vaults, Mace Core)' },
       { label: 'Stronghold Count', value: '128 per world in concentric rings' },
-      { label: 'Deepest Structure', value: 'Ancient City (Y=-52 in Deep Dark)' },
-      { label: 'Official Source', value: 'minecraft.wiki/w/Generated_structures' }
+      { label: 'Official Source', value: 'minecraft.net/en-us/updates/minecraft-updates-timeline-and-evolution' }
     ],
     sections: [
       {
         id: 'structures-list',
         title: '1. Key Generated Structures Directory',
-        content: 'Major dungeons across all dimensions providing progression-critical items:',
+        content: 'Major dungeons and exploration sites across all dimensions providing progression-critical items:',
         table: {
           headers: ['Structure', 'Dimension & Elevation', 'Exclusive Loot & Key Dangers'],
           rows: [
+            ['Abandoned Camps (26.3)', 'Overworld Dappled Forests & Plains', 'Explorer Maps, Poplar saplings, Straw Beds, Wool Cushions • Wildlife'],
             ['Trial Chambers (1.21)', 'Overworld (Y=-20 to Y=-40)', 'Heavy Core, Breeze Rods, Flow/Bolt Armor Trims, Ominous Vaults'],
             ['Ancient City (1.19)', 'Overworld Deep Dark (Y=-52)', 'Swift Sneak III books, Silence Armor Trim, Echo Shards • The Warden'],
             ['Stronghold', 'Overworld (128 concentric rings)', 'End Portal Frame, Library bookshelves • Silverfish spawners'],
@@ -905,16 +973,17 @@ export const ENCYCLOPEDIA_TOPICS = [
   {
     id: 12,
     slug: 'farming-food',
-    title: 'Survival Guides: Farming, Food & Saturation',
+    title: 'Survival Guides: Farming, Food, Camps & Straw Beds',
     categoryId: 'learn',
     categoryName: 'Learn Minecraft',
-    subtopicLabel: 'Survival guides · Hunger dynamics',
-    versionBadge: 'Saturation & Crop Ticks',
-    applicableVersions: 'Java 1.0.0 – 1.21.3+',
-    lastVerified: 'October 24, 2024 (Java 1.21.3)',
+    subtopicLabel: 'Survival guides · Camping & Hunger dynamics',
+    versionBadge: 'Saturation & Straw Beds',
+    applicableVersions: 'Java 1.0.0 – 26.3+ (Wilderness Bound)',
+    lastVerified: 'October 2026 (Java 26.3 Wilderness Bound Release)',
     icon: 'wheat',
-    summary: 'Crop hydration within 4 blocks of water, bone meal growth stages, animal breeding mechanics, and the two-tier Hunger & Saturation metabolic system.',
+    summary: 'Crop hydration within 4 blocks of water, metabolic hunger/saturation rules, portable camp gear, and the new 26.3 Straw Bed night-skip mechanic that preserves spawn locations.',
     keyFacts: [
+      'Straw Beds (26.3 Wilderness Bound): Single-use portable bed roll that sleeps through the night without resetting your primary bed respawn anchor.',
       'Water hydrates farmland in a 9x9 square (up to 4 blocks horizontally in all directions on the same or lower Y-level).',
       'Planting alternating crop rows doubles growth rate by avoiding same-crop adjacency penalties.',
       'Hunger operates on two separate meters: visible Food Level (0–20) and hidden Saturation Level (0–20).',
@@ -923,8 +992,8 @@ export const ENCYCLOPEDIA_TOPICS = [
     quickReference: [
       { label: 'Water Hydration Radius', value: '4 blocks in all horizontal directions' },
       { label: 'Best Food (Saturation)', value: 'Golden Carrot (14.4 Saturation / 6 Food)' },
-      { label: 'Rapid Healing Threshold', value: 'Food bar at 20 + positive saturation' },
-      { label: 'Official Source', value: 'minecraft.wiki/w/Hunger' }
+      { label: 'New Camping Tool', value: 'Straw Bed (Sleeps night without spawn reset)' },
+      { label: 'Official Source', value: 'minecraft.net/en-us/updates/minecraft-updates-timeline-and-evolution' }
     ],
     sections: [
       {
@@ -950,6 +1019,23 @@ export const ENCYCLOPEDIA_TOPICS = [
           type: 'tip',
           title: 'The Alternating Row Growth Bonus',
           text: 'Crops planted in alternating rows (e.g. Wheat, Carrots, Wheat, Carrots) grow at twice the speed of solid monochromatic crop fields by avoiding adjacency growth penalties.'
+        }
+      },
+      {
+        id: 'camping-straw-beds',
+        title: '3. Exploration Camping: Straw Beds & Cushions (Java 26.3)',
+        content: 'Long exploration journeys away from main bases previously carried severe risk when resetting respawn anchors. Java 26.3 introduces dedicated camping mechanics:',
+        table: {
+          headers: ['Item / Equipment', 'Crafting Recipe', 'Key Gameplay Advantage'],
+          rows: [
+            ['Straw Bed', '3 Wheat + 3 Poplar / Wooden Slabs', 'Passes nighttime/storms and breaks into straw fibers without overriding your home spawn point.'],
+            ['Wool Cushion', '2 Wool + 1 Feather (Any 16 dye colors)', 'Compact sit-able block for campers, outposts, and mounts without requiring stairs/minecart glitches.']
+          ]
+        },
+        callout: {
+          type: 'important',
+          title: 'Respawn Preservation',
+          text: 'Using a standard wooden bed outside your base overwrites your home respawn point. When exploring biomes thousands of blocks away, carry a Straw Bed to skip phantoms and hostile night spawns safely without losing your home respawn.'
         }
       }
     ],

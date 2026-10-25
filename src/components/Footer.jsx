@@ -39,7 +39,7 @@ export default function Footer() {
                 </span>
               </span>
               <p className="text-[11px] text-zinc-400 font-mono mt-0.5">
-                Verified against official Java 1.21.3 Bundles of Bravery &amp; 24w40a+ snapshots.
+                Verified against official Java 26.3 Wilderness Bound (Game Drop 3) &amp; Java 26.4 Snapshot 5 changelogs.
               </p>
             </div>
           </div>

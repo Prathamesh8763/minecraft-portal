@@ -1,12 +1,67 @@
-// Comprehensive Minecraft Java Edition Data (Verified Canonical Data: 1.0 to 1.21.3 + Pale Garden Snapshots)
-// Grounded strictly in official Mojang Studios releases, snapshots (24w40a+), and official Minecraft Wiki documentation.
+// Comprehensive Minecraft Java Edition Data (Verified Canonical Data: 1.0 to 26.3 Wilderness Bound + 26.4 Snapshots)
+// Grounded strictly in official Mojang Studios releases, official changelogs, and official Minecraft update timelines.
 
 export const GAME_DROPS = [
   {
+    id: "26-3-wilderness-bound",
+    version: "Java 26.3 & Bedrock 26.50",
+    date: "September 15, 2026",
+    tag: "CURRENT STABLE RELEASE",
+    title: "Wilderness Bound (Game Drop 3)",
+    icon: "/icons/minecraft/poplar_sign.svg",
+    fallbackIcon: "/icons/minecraft/oak_log.svg",
+    accent: "#eab308",
+    bgGradient: "from-amber-950/90 to-stone-900/60",
+    description: "The official autumn-themed wilderness and camping Game Drop. Introduces the vibrant Dappled Forest biome, the full Poplar wood family, Abandoned Camps with Explorer Maps, portable single-use Straw Beds, sit-able Cushions, and 16-color wool/concrete stairs and slabs.",
+    features: [
+      { name: "The Dappled Forest Biome", desc: "Cozy autumn forest biome with vibrant red, orange, and yellow leaf canopies, leaf litter ground cover, coarse dirt paths, and shelf mushrooms." },
+      { name: "Poplar Trees & Complete Wood Set", desc: "Towering new Poplar trees yielding Poplar logs and a warm grey wood palette: planks, stairs, slabs, fences, gates, doors, trapdoors, signs, and boats." },
+      { name: "Abandoned Camps & Explorer Maps", desc: "Surface campsites generated across multiple biomes containing loot barrels and Explorer Maps pointing towards Ancient Cities, Mineshafts, and Pyramids." },
+      { name: "Straw Beds (Night Skip)", desc: "Crafted from 3 Hay Bales. Single-use portable bed suited for nomadic exploration; skips the night without resetting your primary bed spawn point." },
+      { name: "Sit-able Cushions & Slabs/Stairs", desc: "Crafted from 3 Wool Slabs. Collision-free decorative cushions allowing players to sit. Adds full wool and concrete stairs & slabs in all 16 dye colors." }
+    ]
+  },
+  {
+    id: "26-4-winter-drop",
+    version: "Java 26.4 Snapshot Preview (Snap 5)",
+    date: "Active Testing (October 2026)",
+    tag: "ACTIVE SNAPSHOT (IN TESTING)",
+    title: "Winter Drop: Ice Caves & The Frostbite",
+    icon: "/icons/minecraft/chiseled_packed_ice.svg",
+    fallbackIcon: "/icons/minecraft/blue_ice.svg",
+    accent: "#38bdf8",
+    bgGradient: "from-cyan-950/90 to-slate-900/60",
+    description: "Currently in public snapshot testing (not yet stable). Subterranean Ice Caves, growing Icicles, directional light-emitting Ice Crystals, the freezing Frostbite mob, Packed Ice Bricks, and experimental Vulkan rendering.",
+    features: [
+      { name: "Subterranean Ice Caves", desc: "Spectacular underground biome generated beneath cold mountain biomes, featuring packed ice ceilings, calcite veins, and deepslate ore pockets." },
+      { name: "The Frostbite Hostile Mob", desc: "Cold-adapted zombie variant dwelling in deep Ice Caves. Hurls lethal Ice Balls and inflicts the Freezing screen-vignette status effect on hit." },
+      { name: "Icicles & Directional Ice Crystals", desc: "Speleothem-like stalactites growing up to 5 blocks long, alongside directional light-emitting Ice Crystals that can be oriented on walls and ceilings." },
+      { name: "Packed Ice Bricks Family", desc: "Complete architectural stonecutter set (bricks, stairs, slabs, walls, chiseled) crafted from packed ice for durable winter structures." },
+      { name: "Vulkan Modern Graphics Pipeline", desc: "Experimental modern Vulkan graphics API backend option for enhanced GPU rendering efficiency and frame-rate stability." }
+    ]
+  },
+  {
+    id: "26-1-tiny-takeover",
+    version: "Java 26.1",
+    date: "March 2026",
+    tag: "OFFICIAL GAME DROP",
+    title: "Tiny Takeover (Game Drop 1)",
+    icon: "/icons/minecraft/lead.svg",
+    fallbackIcon: "/icons/minecraft/string.svg",
+    accent: "#14b8a6",
+    bgGradient: "from-teal-950/80 to-slate-900/40",
+    description: "Focused on technical quality, entity scale fine-tuning, leashed mob despawning bug fixes, and community-requested backend polish.",
+    features: [
+      { name: "Entity Scale Adjustments", desc: "Fine-tuned hitboxes and visual scale attributes for small mobs, baby animals, and custom data-driven entity models." },
+      { name: "Leashed Mob Persistence", desc: "Fixed long-standing issue where leashed mobs could accidentally despawn or snap leashes during rapid chunk loading." },
+      { name: "Backend Performance Optimizations", desc: "Improved memory allocation for chunk ticking loops and network packet compression." }
+    ]
+  },
+  {
     id: "pale-garden-drop",
-    version: "Java Snapshot 24w40a+",
-    date: "Upcoming Winter Drop",
-    tag: "OFFICIAL PREVIEW",
+    version: "Java 1.21.4 (Winter 2024)",
+    date: "December 2024",
+    tag: "OFFICIAL RELEASE",
     title: "The Pale Garden & The Creaking",
     icon: "/icons/minecraft/creaking_heart.svg",
     fallbackIcon: "/icons/minecraft/creeper.svg",
@@ -220,14 +275,52 @@ export const CRAFTING_RECIPES = [
       null, { name: "Pottery Sherd", icon: "/icons/minecraft/brick.svg" }, null
     ],
     result: { name: "Decorated Pot", icon: "/icons/minecraft/flower_pot.svg", desc: "Decorative ceramic urn crafted from 4 pottery sherds or bricks. Can store a single stack of items and be broken with weapons." }
+  },
+  {
+    id: "straw-bed",
+    name: "Straw Bed",
+    category: "Survival",
+    icon: "/icons/minecraft/straw_bed.svg",
+    version: "26.3 Wilderness Bound",
+    grid: [
+      null, null, null,
+      { name: "Hay Bale", icon: "/icons/minecraft/hay_block.svg" }, { name: "Hay Bale", icon: "/icons/minecraft/hay_block.svg" }, { name: "Hay Bale", icon: "/icons/minecraft/hay_block.svg" },
+      null, null, null
+    ],
+    result: { name: "Straw Bed", icon: "/icons/minecraft/straw_bed.svg", desc: "Single-use portable bed that allows players to sleep and skip the night outdoors without resetting their primary bed respawn point." }
+  },
+  {
+    id: "cushion",
+    name: "Wool Cushion",
+    category: "Decor",
+    icon: "/icons/minecraft/cyan_cushion.svg",
+    version: "26.3 Wilderness Bound",
+    grid: [
+      null, null, null,
+      { name: "Cyan Wool Slab", icon: "/icons/minecraft/cyan_wool.svg" }, { name: "Cyan Wool Slab", icon: "/icons/minecraft/cyan_wool.svg" }, { name: "Cyan Wool Slab", icon: "/icons/minecraft/cyan_wool.svg" },
+      null, null, null
+    ],
+    result: { name: "Cushion", icon: "/icons/minecraft/cyan_cushion.svg", desc: "Decorative sit-able furniture block crafted from 3 wool slabs. Has zero collision, allowing seamless placement in cozy campsites." }
   }
 ];
 
 export const MOBS_DATA = [
   {
+    name: "The Frostbite",
+    type: "Hostile",
+    badge: "26.4 SNAPSHOT (TESTING)",
+    hearts: 10,
+    health: "20 HP",
+    icon: "/icons/minecraft/frostbite.svg",
+    fallbackIcon: "/icons/minecraft/zombie.svg",
+    dimension: "Overworld (Ice Caves)",
+    drops: "Ice Balls, Rotten Flesh, Ice Crystals",
+    desc: "A cold-adapted zombie variant dwelling in subterranean Ice Caves. Hurls lethal Ice Balls and inflicts the Freezing screen-vignette status effect upon impact."
+  },
+  {
     name: "The Creaking",
     type: "Hostile",
-    badge: "SNAPSHOT 24w40a+",
+    badge: "1.21.4 UPDATE",
     hearts: 0,
     health: "Invulnerable (Tethered)",
     icon: "/icons/minecraft/creaking_heart.svg",
@@ -348,10 +441,46 @@ export const MOBS_DATA = [
 
 export const BIOMES_DATA = [
   {
+    id: "dappled-forest",
+    name: "Dappled Forest",
+    dimension: "Overworld",
+    tag: "26.3 WILDERNESS BOUND (STABLE)",
+    temp: "Crisp Autumn",
+    icon: "/icons/minecraft/poplar_sign.svg",
+    fallbackIcon: "/icons/minecraft/oak_leaves.svg",
+    color: "#f59e0b",
+    description: "An autumn-aesthetic temperate woodland characterized by warm red, orange, and yellow poplar leaves, coarse dirt, leaf litter, sideways-growing shelf mushrooms, red shrubs, and abandoned campsites with Explorer Maps.",
+    features: [
+      "Poplar Trees with 3 foliage color variants (red, orange, yellow)",
+      "Shelf Mushrooms (bouncy and edible for rich stew)",
+      "Red Shrubs (decorative ground flora spreadable with Bone Meal)",
+      "Abandoned Camps housing chests, barrels, and Explorer Maps",
+      "Nomadic Straw Beds & sit-able decorative Cushions"
+    ]
+  },
+  {
+    id: "ice-caves",
+    name: "Ice Caves",
+    dimension: "Overworld",
+    tag: "26.4 SNAPSHOT (IN TESTING)",
+    temp: "Subterranean Freezing",
+    icon: "/icons/minecraft/chiseled_packed_ice.svg",
+    fallbackIcon: "/icons/minecraft/blue_ice.svg",
+    color: "#38bdf8",
+    description: "Deep subterranean frozen caverns generated beneath cold mountain biomes, composed of packed ice, calcite, and exposed deepslate ores. Home to the Frostbite mob, hanging icicles, and directional ice crystals.",
+    features: [
+      "The Frostbite hostile mob hurling Ice Balls and Freezing status",
+      "Hanging Icicles (speleothems growing up to 5 blocks long)",
+      "Directional light-emitting Ice Crystals on walls & ceilings",
+      "Packed Ice Bricks stonecutter architectural family",
+      "Vulkan modern graphics API testing ground"
+    ]
+  },
+  {
     id: "pale-garden",
     name: "Pale Garden",
     dimension: "Overworld",
-    tag: "SNAPSHOT 24w40a+",
+    tag: "1.21.4 OFFICIAL RELEASE",
     temp: "Muted / Desaturated",
     icon: "/icons/minecraft/creaking_heart.svg",
     fallbackIcon: "/icons/minecraft/oak_log.svg",
