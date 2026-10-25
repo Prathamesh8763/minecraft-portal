@@ -45,10 +45,12 @@ import {
   ListOrdered
 } from 'lucide-react';
 import { playClick, playPop, playLevelUp } from '../utils/soundFX';
+import { useDebounce, precomputeSearchIndex, buildIdMap } from '../utils/searchEngine';
 
 export default function EncyclopediaHub({ onNavigateToSection }) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const debouncedQuery = useDebounce(searchQuery, 120); // Prevents render thrashing during rapid typing
   const [activeTopicId, setActiveTopicId] = useState(1);
   const [activePopularGuide, setActivePopularGuide] = useState(null);
   const [selectedResultIndex, setSelectedResultIndex] = useState(0);
@@ -57,15 +59,18 @@ export default function EncyclopediaHub({ onNavigateToSection }) {
   const [activeHeadingId, setActiveHeadingId] = useState('');
   const searchInputRef = useRef(null);
 
-  // Active topic object
-  const activeTopic = useMemo(() => {
-    return getEncyclopediaTopicById(activeTopicId) || ENCYCLOPEDIA_TOPICS[0];
-  }, [activeTopicId]);
+  // O(1) Hash Map for instantaneous topic lookup by ID
+  const topicsByIdMap = useMemo(() => buildIdMap(ENCYCLOPEDIA_TOPICS, 'id'), []);
 
-  // Clean search tokens for query
+  // Active topic object retrieved in O(1) time
+  const activeTopic = useMemo(() => {
+    return topicsByIdMap.get(activeTopicId) || ENCYCLOPEDIA_TOPICS[0];
+  }, [activeTopicId, topicsByIdMap]);
+
+  // Clean search tokens for query based on debounced input
   const searchTokens = useMemo(() => {
-    return searchQuery.toLowerCase().trim().split(' ').filter(Boolean);
-  }, [searchQuery]);
+    return debouncedQuery.toLowerCase().trim().split(' ').filter(Boolean);
+  }, [debouncedQuery]);
 
   // Combined searchable items (Topics + Popular Guides)
   const allSearchableItems = useMemo(() => {
@@ -108,45 +113,71 @@ export default function EncyclopediaHub({ onNavigateToSection }) {
     return list;
   }, []);
 
-  // Filtered search results
+  // Precomputed search index (calculated once in O(N) time, zero string allocations per keystroke)
+  const indexedSearchableItems = useMemo(() => {
+    return precomputeSearchIndex(allSearchableItems, (item) => [
+      item.title,
+      item.category,
+      item.description,
+      item.version,
+      ...(item.keyFacts || [])
+    ]);
+  }, [allSearchableItems]);
+
+  // Precomputed index for all 19 topics
+  const indexedTopics = useMemo(() => {
+    return precomputeSearchIndex(ENCYCLOPEDIA_TOPICS, (topic) => [
+      topic.title,
+      topic.summary,
+      topic.categoryName,
+      topic.subtopicLabel,
+      ...(topic.keyFacts || []),
+      ...(topic.quickReference?.map(q => `${q.label} ${q.value}`) || [])
+    ]);
+  }, []);
+
+  // Filtered search results (O(N) token check using pre-normalized haystack)
   const searchResults = useMemo(() => {
     if (!searchTokens.length && selectedCategory === 'all') return [];
 
-    return allSearchableItems.filter(item => {
+    const results = [];
+    for (let i = 0; i < indexedSearchableItems.length; i++) {
+      const item = indexedSearchableItems[i];
       const matchesCategory = selectedCategory === 'all' || item.categoryId === selectedCategory;
-      if (!searchTokens.length) return matchesCategory;
+      if (!matchesCategory) continue;
 
-      const haystack = [
-        item.title,
-        item.category,
-        item.description,
-        item.version,
-        ...(item.keyFacts || [])
-      ].join(' ').toLowerCase();
+      if (!searchTokens.length) {
+        results.push(item);
+        continue;
+      }
 
-      const matchesQuery = searchTokens.every(token => haystack.includes(token));
-      return matchesCategory && matchesQuery;
-    });
-  }, [allSearchableItems, selectedCategory, searchTokens]);
+      const haystack = item._searchHaystack;
+      let matches = true;
+      for (let t = 0; t < searchTokens.length; t++) {
+        if (!haystack.includes(searchTokens[t])) {
+          matches = false;
+          break;
+        }
+      }
+
+      if (matches) {
+        results.push(item);
+        if (results.length >= 30) break; // Bounded window for fast DOM updates
+      }
+    }
+    return results;
+  }, [indexedSearchableItems, selectedCategory, searchTokens]);
 
   // Topics filtered for the 19-topics reader
   const filteredTopics = useMemo(() => {
-    return ENCYCLOPEDIA_TOPICS.filter(topic => {
+    return indexedTopics.filter(topic => {
       const matchesCategory = selectedCategory === 'all' || topic.categoryId === selectedCategory;
       if (!searchTokens.length) return matchesCategory;
 
-      const haystack = [
-        topic.title,
-        topic.summary,
-        topic.categoryName,
-        topic.subtopicLabel,
-        ...(topic.keyFacts || []),
-        ...(topic.quickReference?.map(q => `${q.label} ${q.value}`) || [])
-      ].join(' ').toLowerCase();
-
+      const haystack = topic._searchHaystack;
       return matchesCategory && searchTokens.every(token => haystack.includes(token));
     });
-  }, [selectedCategory, searchTokens]);
+  }, [indexedTopics, selectedCategory, searchTokens]);
 
   // Previous and Next topic calculation
   const currentTopicIndex = useMemo(() => {

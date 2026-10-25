@@ -23,27 +23,51 @@ import {
   X
 } from 'lucide-react';
 import { playClick, playPop } from '../utils/soundFX';
+import { useDebounce, precomputeSearchIndex, buildCategoryMultiMap } from '../utils/searchEngine';
 
 export default function PortalHub({ onSelectSection, onToggleViewMode, viewMode }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const debouncedQuery = useDebounce(searchQuery, 120);
+
+  // Precomputed search index for navigation items (calculated once in O(N) time)
+  const indexedNavItems = useMemo(() => {
+    return precomputeSearchIndex(NAVIGATION_ITEMS, (item) => [
+      item.label,
+      item.fullTitle,
+      item.desc,
+      item.categoryLabel,
+      item.badge
+    ]);
+  }, []);
+
+  // Precomputed search index for popular guides
+  const indexedGuides = useMemo(() => {
+    return precomputeSearchIndex(POPULAR_GUIDES, (guide) => [
+      guide.title,
+      guide.summary,
+      guide.category,
+      guide.details || ''
+    ]);
+  }, []);
+
+  // Fast O(1) multi-map grouping by category
+  const categoryMultiMap = useMemo(() => {
+    return buildCategoryMultiMap(NAVIGATION_ITEMS, 'categoryId');
+  }, []);
 
   // 1. Omnisearch filtering across navigation items, popular guides, and topics
   const searchResults = useMemo(() => {
-    const q = searchQuery.toLowerCase().trim();
+    const q = debouncedQuery.toLowerCase().trim();
     if (!q) return null;
+    const tokens = q.split(/\s+/).filter(Boolean);
 
-    const matchedItems = NAVIGATION_ITEMS.filter(item => 
-      item.label.toLowerCase().includes(q) ||
-      item.fullTitle.toLowerCase().includes(q) ||
-      item.desc.toLowerCase().includes(q) ||
-      item.categoryLabel.toLowerCase().includes(q)
+    const matchedItems = indexedNavItems.filter(item => 
+      tokens.every(token => item._searchHaystack.includes(token))
     );
 
-    const matchedGuides = POPULAR_GUIDES.filter(guide => 
-      guide.title.toLowerCase().includes(q) ||
-      guide.summary.toLowerCase().includes(q) ||
-      guide.category.toLowerCase().includes(q)
+    const matchedGuides = indexedGuides.filter(guide => 
+      tokens.every(token => guide._searchHaystack.includes(token))
     );
 
     return {
@@ -51,13 +75,13 @@ export default function PortalHub({ onSelectSection, onToggleViewMode, viewMode 
       guides: matchedGuides,
       totalCount: matchedItems.length + matchedGuides.length
     };
-  }, [searchQuery]);
+  }, [debouncedQuery, indexedNavItems, indexedGuides]);
 
   // Filtered Items for Browse Categories section
-  const filteredItems = NAVIGATION_ITEMS.filter(item => {
-    if (selectedCategory === 'All') return true;
-    return item.categoryId === selectedCategory;
-  });
+  const filteredItems = useMemo(() => {
+    if (selectedCategory === 'All') return NAVIGATION_ITEMS;
+    return categoryMultiMap.get(selectedCategory) || [];
+  }, [selectedCategory, categoryMultiMap]);
 
   return (
     <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-slate-100 space-y-16">

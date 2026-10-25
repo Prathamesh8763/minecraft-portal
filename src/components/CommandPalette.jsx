@@ -1,23 +1,33 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { NAVIGATION_ITEMS } from '../data/navigationRoutes';
 import { Search, X, ArrowRight, CornerDownLeft, Sparkles } from 'lucide-react';
 import { playClick, playPop } from '../utils/soundFX';
+import { precomputeSearchIndex } from '../utils/searchEngine';
 
 export default function CommandPalette({ isOpen, onClose, onSelectSection }) {
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
 
-  const filteredItems = NAVIGATION_ITEMS.filter(item => {
-    if (!query.trim()) return true;
-    const q = query.toLowerCase();
-    return (
-      item.label.toLowerCase().includes(q) ||
-      item.fullTitle.toLowerCase().includes(q) ||
-      item.categoryLabel.toLowerCase().includes(q) ||
-      item.desc.toLowerCase().includes(q)
+  // Precomputed search index (calculated once)
+  const indexedItems = useMemo(() => {
+    return precomputeSearchIndex(NAVIGATION_ITEMS, (item) => [
+      item.label,
+      item.fullTitle,
+      item.categoryLabel,
+      item.desc
+    ]);
+  }, []);
+
+  const filteredItems = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return indexedItems;
+    const tokens = q.split(/\s+/).filter(Boolean);
+
+    return indexedItems.filter(item => 
+      tokens.every(token => item._searchHaystack.includes(token))
     );
-  });
+  }, [query, indexedItems]);
 
   useEffect(() => {
     if (isOpen) {

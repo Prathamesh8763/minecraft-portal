@@ -313,11 +313,11 @@ Sent securely to: Verified Portal Administration`;
       return;
     }
 
-    // Rate Limiting Protection: Prevent spamming within 10 seconds
+    // Rate Limiting Protection: Prevent spamming within 30 seconds
     const now = Date.now();
-    if (now - lastSubmitTime < 10000) {
-      const waitSeconds = Math.ceil((10000 - (now - lastSubmitTime)) / 1000);
-      setStatusMessage(`Please wait ${waitSeconds} seconds before dispatching another message.`);
+    if (now - lastSubmitTime < 30000) {
+      const waitSeconds = Math.ceil((30000 - (now - lastSubmitTime)) / 1000);
+      setStatusMessage(`Rate limit active: Please wait ${waitSeconds} seconds before dispatching another message.`);
       setSubmitStatus('error');
       playPop();
       return;
@@ -884,6 +884,17 @@ Sent securely to: Verified Portal Administration`;
                   </div>
                 </div>
               )}
+
+              {/* Privacy Notice & Data Minimization Disclosure */}
+              <div className="p-3.5 rounded-xl bg-[#0e0f17] border border-[#26283b] text-[11px] font-mono text-zinc-400 space-y-1">
+                <div className="flex items-center gap-1.5 text-zinc-300 font-semibold">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Privacy &amp; Data Minimization Notice</span>
+                </div>
+                <p className="leading-relaxed">
+                  We collect only the feedback text and category you provide to improve encyclopedia guides and fix bugs. Your email is optional and only used if you request a reply. Messages are delivered via FormSubmit to the developer desk and retained for 90 days. No cookies, trackers, or user profiling are used.
+                </p>
+              </div>
 
               {/* Action Buttons: Submit & Fallback */}
               <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
