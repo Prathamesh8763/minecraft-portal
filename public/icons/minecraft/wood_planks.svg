@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+<polygon points="16,2 29,8 16,14 3,8" fill="#b45309" stroke="#d97706" stroke-width="1" />
+    <polygon points="3,8 16,14 16,28 3,22" fill="#78350f" />
+    <polygon points="16,14 29,8 29,22 16,28" fill="#451a03" />
+    <!-- Plank horizontal lines -->
+    <line x1="3" y1="13" x2="16" y2="19" stroke="#451a03" stroke-width="1" />
+    <line x1="16" y1="19" x2="29" y2="13" stroke="#260f02" stroke-width="1" />
+    <line x1="3" y1="18" x2="16" y2="24" stroke="#451a03" stroke-width="1" />
+    <line x1="16" y1="24" x2="29" y2="18" stroke="#260f02" stroke-width="1" />
+</svg>

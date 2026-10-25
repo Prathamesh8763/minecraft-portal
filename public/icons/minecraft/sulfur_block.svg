@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+<polygon points="16,2 29,8 16,14 3,8" fill="#facc15" stroke="#eab308" stroke-width="1" />
+    <polygon points="3,8 16,14 16,28 3,22" fill="#eab308" />
+    <polygon points="16,14 29,8 29,22 16,28" fill="#ca8a04" />
+    <!-- Yellow mineral textures -->
+    <circle cx="16" cy="8" r="2" fill="#fef08a" />
+    <circle cx="9" cy="18" r="2" fill="#a16207" />
+    <circle cx="23" cy="18" r="2" fill="#a16207" />
+</svg>

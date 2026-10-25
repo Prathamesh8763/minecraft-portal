@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+<polygon points="16,4 28,10 24,24 8,24 4,10" fill="#18181b" stroke="#09090b" stroke-width="1.5" />
+    <!-- Glowing Purple Dragon Eyes -->
+    <polygon points="9,14 13,13 12,17" fill="#c084fc" />
+    <circle cx="11" cy="15" r="1" fill="#f5d0fe" />
+    <polygon points="23,14 19,13 20,17" fill="#c084fc" />
+    <circle cx="21" cy="15" r="1" fill="#f5d0fe" />
+    <!-- Snout / Nostrils -->
+    <rect x="13" y="19" width="6" height="3" fill="#27272a" />
+    <circle cx="14.5" cy="20.5" r="0.8" fill="#52525b" />
+    <circle cx="17.5" cy="20.5" r="0.8" fill="#52525b" />
+</svg>

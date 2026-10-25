@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+
+    <!-- Stem -->
+    <rect x="15" y="17" width="2" height="10" fill="#15803d" />
+    <rect x="13" y="21" width="2" height="3" fill="#16a34a" />
+    <!-- Golden Petals -->
+    <circle cx="16" cy="13" r="6" fill="#eab308" />
+    <circle cx="16" cy="13" r="4" fill="#facc15" />
+    <circle cx="16" cy="13" r="2" fill="#fef08a" />
+    <!-- Gold nuggets aura -->
+    <rect x="10" y="8" width="2" height="2" fill="#fbbf24" />
+    <rect x="21" y="8" width="2" height="2" fill="#fbbf24" />
+    <rect x="9" y="15" width="2" height="2" fill="#fbbf24" />
+    <rect x="22" y="15" width="2" height="2" fill="#fbbf24" />
+  
+</svg>

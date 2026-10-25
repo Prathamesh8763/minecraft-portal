@@ -1,0 +1,262 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --mc-grass: #5c8e32;
+    --mc-grass-dark: #3e6320;
+    --mc-dirt: #573d26;
+    --mc-stone: #686868;
+    --mc-deepslate: #242428;
+    --mc-diamond: #4aedd9;
+    --mc-gold: #f8c53a;
+    --mc-redstone: #ff2a2a;
+    --mc-nether: #851e3e;
+    --mc-end: #d7d99b;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem; /* Offset for fixed top navbar */
+  }
+}
+
+/* Custom Hide Scrollbar for Horizontal Navigation */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Font Families */
+.font-pixel {
+  font-family: 'Press Start 2P', monospace;
+}
+.font-silkscreen {
+  font-family: 'Silkscreen', monospace;
+}
+.font-vt {
+  font-family: 'VT323', monospace;
+}
+
+/* Authentic Minecraft Text Shadows */
+.mc-shadow {
+  text-shadow: 2px 2px 0px #000000;
+}
+.mc-shadow-lg {
+  text-shadow: 3px 3px 0px #000000, 0 0 10px rgba(0,0,0,0.7);
+}
+.mc-shadow-gold {
+  text-shadow: 2px 2px 0px #3f2e00, 0 0 12px rgba(248, 197, 58, 0.5);
+}
+.mc-shadow-diamond {
+  text-shadow: 2px 2px 0px #093732, 0 0 14px rgba(74, 237, 217, 0.6);
+}
+
+/* Authentic Minecraft GUI Button */
+.mc-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Silkscreen', 'Press Start 2P', monospace;
+  padding: 0.6rem 1.4rem;
+  background-color: #55555d;
+  color: #ffffff;
+  border-top: 3px solid #8e8e98;
+  border-left: 3px solid #8e8e98;
+  border-right: 3px solid #232328;
+  border-bottom: 3px solid #232328;
+  box-shadow: inset 1px 1px 0px #ffffff, inset -1px -1px 0px #18181c, 0 4px 10px rgba(0,0,0,0.5);
+  text-shadow: 2px 2px 0px #18181c;
+  cursor: pointer;
+  user-select: none;
+  transition: filter 0.1s, transform 0.05s;
+}
+
+.mc-btn:hover {
+  background-color: #6a6a75;
+  filter: brightness(1.1);
+}
+
+.mc-btn:active {
+  border-top: 3px solid #232328;
+  border-left: 3px solid #232328;
+  border-right: 3px solid #8e8e98;
+  border-bottom: 3px solid #8e8e98;
+  box-shadow: inset 2px 2px 0px #18181c, inset -1px -1px 0px #8e8e98;
+  transform: translateY(2px);
+}
+
+.mc-btn-green {
+  background-color: #4a7528;
+  border-top-color: #79af42;
+  border-left-color: #79af42;
+  border-right-color: #233b11;
+  border-bottom-color: #233b11;
+  box-shadow: inset 1px 1px 0px #9ee256, inset -1px -1px 0px #162609;
+}
+.mc-btn-green:hover {
+  background-color: #5c8e32;
+}
+
+.mc-btn-diamond {
+  background-color: #1a6f66;
+  border-top-color: #4aedd9;
+  border-left-color: #4aedd9;
+  border-right-color: #0b3732;
+  border-bottom-color: #0b3732;
+  box-shadow: inset 1px 1px 0px #7efdf0, inset -1px -1px 0px #051d1a;
+}
+.mc-btn-diamond:hover {
+  background-color: #248a7f;
+}
+
+/* Minecraft Window / Box */
+.mc-panel {
+  background: #1e1e24;
+  border-top: 4px solid #4a4a56;
+  border-left: 4px solid #4a4a56;
+  border-right: 4px solid #0f0f13;
+  border-bottom: 4px solid #0f0f13;
+  box-shadow: inset 2px 2px 0px #5c5c6b, inset -2px -2px 0px #131317, 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.mc-panel-gold {
+  border-top-color: #f8c53a;
+  border-left-color: #f8c53a;
+  border-right-color: #634502;
+  border-bottom-color: #634502;
+}
+
+/* Item Slot */
+.mc-slot {
+  width: 52px;
+  height: 52px;
+  background-color: #222228;
+  border-top: 3px solid #101014;
+  border-left: 3px solid #101014;
+  border-right: 3px solid #5a5a6a;
+  border-bottom: 3px solid #5a5a6a;
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.15s ease;
+}
+.mc-slot:hover {
+  background-color: #2e2e38;
+  border-color: #4aedd9;
+}
+.mc-slot-active {
+  background-color: #353542;
+  border-color: #f8c53a;
+}
+
+/* Enchantment Glint effect */
+.mc-enchant-glint {
+  position: relative;
+  overflow: hidden;
+}
+.mc-enchant-glint::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    115deg,
+    rgba(147, 51, 234, 0) 30%,
+    rgba(216, 180, 254, 0.45) 50%,
+    rgba(147, 51, 234, 0) 70%
+  );
+  transform: rotate(25deg);
+  animation: mcGlint 3s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes mcGlint {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+
+/* Custom Minecraft-like Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #121217;
+  border-left: 2px solid #24242c;
+}
+::-webkit-scrollbar-thumb {
+  background: #4a4a58;
+  border-top: 2px solid #6b6b7d;
+  border-left: 2px solid #6b6b7d;
+  border-right: 2px solid #1a1a20;
+  border-bottom: 2px solid #1a1a20;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5c8e32;
+  border-color: #79af42;
+}
+
+/* Modern Web Guidance: Scroll-Driven Animations & View Timeline */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes revealCard {
+      from {
+        opacity: 0.1;
+        transform: translateY(40px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .scroll-reveal {
+      view-timeline: --card-reveal block;
+      animation: revealCard linear both;
+      animation-timeline: --card-reveal;
+      animation-range: entry 10% cover 35%;
+    }
+
+    @keyframes heroParallax {
+      from {
+        transform: translateY(0px);
+      }
+      to {
+        transform: translateY(-80px);
+      }
+    }
+
+    .hero-parallax {
+      view-timeline: --hero-view block;
+      animation: heroParallax linear both;
+      animation-timeline: --hero-view;
+      animation-range: exit 0% exit 100%;
+    }
+  }
+}
+
+/* Floating Block Animation */
+@keyframes floatBlock {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+.animate-float {
+  animation: floatBlock 4s ease-in-out infinite;
+}
+
+/* Torch Flicker Glow */
+@keyframes torchGlow {
+  0%, 100% { filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.45)); }
+  33% { filter: drop-shadow(0 0 19px rgba(245, 158, 11, 0.65)); }
+  66% { filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.35)); }
+}
+.torch-glow {
+  animation: torchGlow 1.8s ease-in-out infinite;
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+<rect x="4" y="4" width="24" height="24" fill="#15803d" />
+    <!-- Dark hair -->
+    <rect x="4" y="4" width="24" height="6" fill="#166534" />
+    <!-- Hollow Eyes -->
+    <rect x="8" y="12" width="4" height="3" fill="#052e16" />
+    <rect x="20" y="12" width="4" height="3" fill="#052e16" />
+    <!-- Nose -->
+    <rect x="14" y="15" width="4" height="3" fill="#14532d" />
+</svg>

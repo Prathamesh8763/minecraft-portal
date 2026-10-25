@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+<rect x="6" y="6" width="20" height="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+    <!-- Happy Eyes -->
+    <rect x="9" y="12" width="4" height="2" fill="#475569" />
+    <rect x="19" y="12" width="4" height="2" fill="#475569" />
+    <!-- Smile -->
+    <rect x="13" y="17" width="6" height="2" fill="#64748b" />
+    <!-- Tentacles -->
+    <rect x="8" y="24" width="2" height="5" fill="#f8fafc" />
+    <rect x="12" y="24" width="2" height="6" fill="#f8fafc" />
+    <rect x="18" y="24" width="2" height="6" fill="#f8fafc" />
+    <rect x="22" y="24" width="2" height="5" fill="#f8fafc" />
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+
+    <!-- Face Base -->
+    <rect x="4" y="4" width="24" height="24" fill="#b48364" />
+    <!-- Hair -->
+    <rect x="4" y="4" width="24" height="7" fill="#452718" />
+    <rect x="4" y="11" width="3" height="4" fill="#452718" />
+    <rect x="25" y="11" width="3" height="4" fill="#452718" />
+    <!-- Eyes -->
+    <rect x="7" y="13" width="5" height="3" fill="#ffffff" />
+    <rect x="20" y="13" width="5" height="3" fill="#ffffff" />
+    <rect x="9" y="13" width="3" height="3" fill="#2563eb" />
+    <rect x="20" y="13" width="3" height="3" fill="#2563eb" />
+    <!-- Nose -->
+    <rect x="14" y="15" width="4" height="3" fill="#916147" />
+    <!-- Mouth / Beard -->
+    <rect x="12" y="19" width="8" height="3" fill="#522f1c" />
+    <rect x="13" y="19" width="6" height="1" fill="#754731" />
+  
+</svg>

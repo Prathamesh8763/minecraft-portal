@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+<!-- Wood Stick -->
+    <rect x="14" y="12" width="4" height="16" fill="#78350f" stroke="#451a03" stroke-width="1" />
+    <!-- Coal head with flame -->
+    <rect x="13" y="8" width="6" height="5" fill="#18181b" />
+    <polygon points="16,3 19,8 13,8" fill="#f59e0b" />
+    <polygon points="16,4 18,8 14,8" fill="#fef08a" />
+</svg>

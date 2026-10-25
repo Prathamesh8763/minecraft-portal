@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges">
+  <!-- Dirt base -->
+  <rect x="0" y="0" width="32" height="32" fill="#573d26" />
+  <rect x="4" y="16" width="4" height="4" fill="#3f2b1a" />
+  <rect x="12" y="20" width="4" height="4" fill="#6f5033" />
+  <rect x="24" y="16" width="4" height="4" fill="#3f2b1a" />
+  <rect x="20" y="24" width="4" height="4" fill="#6f5033" />
+  <rect x="8" y="24" width="4" height="4" fill="#3f2b1a" />
+  
+  <!-- Grass top layer -->
+  <rect x="0" y="0" width="32" height="10" fill="#5c8e32" />
+  <!-- Grass highlight rim -->
+  <rect x="0" y="0" width="32" height="2" fill="#75af3e" />
+  <!-- Drips of grass -->
+  <rect x="2" y="10" width="4" height="3" fill="#5c8e32" />
+  <rect x="8" y="10" width="4" height="5" fill="#4a7328" />
+  <rect x="14" y="10" width="4" height="2" fill="#5c8e32" />
+  <rect x="18" y="10" width="4" height="6" fill="#4a7328" />
+  <rect x="24" y="10" width="4" height="3" fill="#5c8e32" />
+  <rect x="28" y="10" width="4" height="4" fill="#4a7328" />
+</svg>

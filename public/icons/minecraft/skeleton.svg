@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+<rect x="4" y="4" width="24" height="24" fill="#cbd5e1" />
+    <!-- Eye sockets -->
+    <rect x="8" y="12" width="5" height="4" fill="#1e293b" />
+    <rect x="19" y="12" width="5" height="4" fill="#1e293b" />
+    <!-- Nose -->
+    <rect x="15" y="17" width="2" height="3" fill="#1e293b" />
+    <!-- Teeth -->
+    <rect x="10" y="22" width="12" height="3" fill="#94a3b8" />
+    <rect x="11" y="22" width="2" height="3" fill="#1e293b" />
+    <rect x="15" y="22" width="2" height="3" fill="#1e293b" />
+    <rect x="19" y="22" width="2" height="3" fill="#1e293b" />
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+<rect x="4" y="4" width="24" height="24" fill="#0f0f14" />
+    <!-- Glowing Purple Eyes -->
+    <rect x="6" y="14" width="7" height="2" fill="#d946ef" />
+    <rect x="8" y="14" width="3" height="2" fill="#fae8ff" />
+    <rect x="19" y="14" width="7" height="2" fill="#d946ef" />
+    <rect x="21" y="14" width="3" height="2" fill="#fae8ff" />
+</svg>
