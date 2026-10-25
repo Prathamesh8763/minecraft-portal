@@ -7,6 +7,8 @@
 
 import { ENCYCLOPEDIA_TOPICS, POPULAR_GUIDES, ENCYCLOPEDIA_CATEGORIES } from '../data/minecraftEncyclopediaData.js';
 import { NAVIGATION_ITEMS, NAVIGATION_CATEGORIES } from '../data/navigationRoutes.js';
+import { BREWING_RECIPES } from '../data/minecraftBrewing.js';
+import { BREWING_ASSET_REGISTRY } from '../data/brewingAssets.js';
 
 export function validateAllContent() {
   const errors = [];
@@ -90,6 +92,19 @@ export function validateAllContent() {
     }
   });
 
+  // 4. Validate BREWING_RECIPES & Asset Alignment
+  const brewingIds = new Set();
+  BREWING_RECIPES.forEach(rec => {
+    if (brewingIds.has(rec.id)) {
+      errors.push(`Brewing Recipe: Duplicate ID '${rec.id}'.`);
+    }
+    brewingIds.add(rec.id);
+
+    if (!rec.ingredientId) {
+      errors.push(`Brewing Recipe '${rec.name}': Missing ingredientId.`);
+    }
+  });
+
   return {
     valid: errors.length === 0,
     errors,
@@ -98,7 +113,8 @@ export function validateAllContent() {
       totalTopics: ENCYCLOPEDIA_TOPICS.length,
       totalGuides: POPULAR_GUIDES.length,
       totalNavItems: NAVIGATION_ITEMS.length,
-      totalCategories: ENCYCLOPEDIA_CATEGORIES.length
+      totalCategories: ENCYCLOPEDIA_CATEGORIES.length,
+      totalBrewingRecipes: BREWING_RECIPES.length
     }
   };
 }
@@ -107,7 +123,7 @@ export function validateAllContent() {
 if (typeof process !== 'undefined' && process.argv && process.argv[1]?.endsWith('validateContent.js')) {
   console.log('--- Minecraft Portal Semantic Content Validation ---');
   const result = validateAllContent();
-  console.log(`Verified ${result.stats.totalTopics} Topics, ${result.stats.totalGuides} Guides, ${result.stats.totalNavItems} Navigation Items.`);
+  console.log(`Verified ${result.stats.totalTopics} Topics, ${result.stats.totalGuides} Guides, ${result.stats.totalNavItems} Navigation Items, ${result.stats.totalBrewingRecipes} Brewing Recipes.`);
   
   if (result.warnings.length > 0) {
     console.warn(`[WARNINGS] (${result.warnings.length}):`);
